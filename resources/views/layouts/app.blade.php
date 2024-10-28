@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Gunung Sembung')</title>
     @vite('resources/css/app.css')</head>
-<body>
+<body class="font-helvetica">
     <header>
         @include('partials.header') <!-- Menyertakan header dari partials -->
     </header>
@@ -21,6 +21,6 @@
     </footer>
 
     <!-- JavaScript -->
-    <script src="{{ asset('js/app.js') }}"></script>
+    @vite('resources/js/app.js');
 </body>
 </html>
