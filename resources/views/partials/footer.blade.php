@@ -1,126 +1,202 @@
-<div class="bg-red-600">
-    <div class="max-w-screen-lg px-4 sm:px-6 text-gray-800 sm:grid md:grid-cols-4 sm:grid-cols-2 mx-auto">
-        <div class="p-5">
-            <h3 class="font-bold text-xl text-white">GUNUNG SEMBUNG PUTRA</h3>
-        </div>
-        <div class="p-5">
-            <div class="text-sm uppercase text-white font-bold">Resources</div>
-            <a class="my-3 block" href="/#">Documentation <span class="text-"></span></a><a
-                class="my-3 block" href="/#">Tutorials <span class="text-teal-600 text-xs p-1"></span></a><a
-                class="my-3 block" href="/#">Support <span class="text-teal-600 text-xs p-1">New</span></a>
-        </div>
-        <div class="p-5">
-            <div class="text-sm uppercase text-white font-bold">Support</div>
-            <a class="my-3 block" href="/#">Help Center <span class="text-teal-600 text-xs p-1"></span></a><a
-                class="my-3 block" href="/#">Privacy Policy <span class="text-teal-600 text-xs p-1"></span></a><a
-                class="my-3 block" href="/#">Conditions <span class="text-teal-600 text-xs p-1"></span></a>
-        </div>
-        <div class="p-5">
-            <div class="text-sm uppercase text-white font-bold">Contact us</div>
-            <a class="my-3 block" href="/#">XXX XXXX, Floor 4 San Francisco, CA
-                <span class="text-teal-600 text-xs p-1"></span></a><a class="my-3 block" href="/#">contact@company.com
-                <span class="text-teal-600 text-xs p-1"></span></a>
-        </div>
-    </div>
-</div>
+<!--
+  Heads up! 👋
 
-<div class="bg-gray-100 pt-2">
-    <div class="flex pb-5 px-3 m-auto pt-5 border-t text-gray-800 text-sm flex-col
-      max-w-screen-lg items-center">
-        <div class="md:flex-auto md:flex-row-reverse mt-2 flex-row flex">
-            <a href="/#" class="w-6 mx-1">
-                <svg class="fill-current cursor-pointer text-gray-500 hover:text-white" width="100%" height="100%"
-                    viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg"
-                    xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/"
-                    style="fill-rule: evenodd; clip-rule: evenodd; stroke-linejoin: round; stroke-miterlimit: 2;">
-                    <path id="Twitter" d="M24,12c0,6.627 -5.373,12 -12,12c-6.627,0 -12,-5.373 -12,-12c0,-6.627
-                  5.373,-12 12,-12c6.627,0 12,5.373 12,12Zm-6.465,-3.192c-0.379,0.168
-                  -0.786,0.281 -1.213,0.333c0.436,-0.262 0.771,-0.676
-                  0.929,-1.169c-0.408,0.242 -0.86,0.418 -1.341,0.513c-0.385,-0.411
-                  -0.934,-0.667 -1.541,-0.667c-1.167,0 -2.112,0.945 -2.112,2.111c0,0.166
-                  0.018,0.327 0.054,0.482c-1.754,-0.088 -3.31,-0.929
-                  -4.352,-2.206c-0.181,0.311 -0.286,0.674 -0.286,1.061c0,0.733 0.373,1.379
-                  0.94,1.757c-0.346,-0.01 -0.672,-0.106 -0.956,-0.264c-0.001,0.009
-                  -0.001,0.018 -0.001,0.027c0,1.023 0.728,1.877 1.694,2.07c-0.177,0.049
-                  -0.364,0.075 -0.556,0.075c-0.137,0 -0.269,-0.014 -0.397,-0.038c0.268,0.838
-                  1.048,1.449 1.972,1.466c-0.723,0.566 -1.633,0.904 -2.622,0.904c-0.171,0
-                  -0.339,-0.01 -0.504,-0.03c0.934,0.599 2.044,0.949 3.237,0.949c3.883,0
-                  6.007,-3.217 6.007,-6.008c0,-0.091 -0.002,-0.183 -0.006,-0.273c0.413,-0.298
-                  0.771,-0.67 1.054,-1.093Z"></path>
-                </svg>
-            </a>
-            <a href="/#" class="w-6 mx-1">
-                <svg class="fill-current cursor-pointer text-gray-500 hover:text-white" width="100%" height="100%"
-                    viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg"
-                    xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/"
-                    style="fill-rule: evenodd; clip-rule: evenodd; stroke-linejoin: round; stroke-miterlimit: 2;">
-                    <path id="Facebook" d="M24,12c0,6.627 -5.373,12 -12,12c-6.627,0 -12,-5.373 -12,-12c0,-6.627
-                  5.373,-12 12,-12c6.627,0 12,5.373
-                  12,12Zm-11.278,0l1.294,0l0.172,-1.617l-1.466,0l0.002,-0.808c0,-0.422
-                  0.04,-0.648 0.646,-0.648l0.809,0l0,-1.616l-1.295,0c-1.555,0 -2.103,0.784
-                  -2.103,2.102l0,0.97l-0.969,0l0,1.617l0.969,0l0,4.689l1.941,0l0,-4.689Z"></path>
-                </svg>
-            </a>
-            <a href="/#" class="w-6 mx-1">
-                <svg class="fill-current cursor-pointer text-gray-500 hover:text-white" width="100%" height="100%"
-                    viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg"
-                    xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/"
-                    style="fill-rule: evenodd; clip-rule: evenodd; stroke-linejoin: round; stroke-miterlimit: 2;">
-                    <g id="Layer_1">
-                        <circle id="Oval" cx="12" cy="12" r="12"></circle>
-                        <path id="Shape" d="M19.05,8.362c0,-0.062 0,-0.125 -0.063,-0.187l0,-0.063c-0.187,-0.562
-                     -0.687,-0.937 -1.312,-0.937l0.125,0c0,0 -2.438,-0.375 -5.75,-0.375c-3.25,0
-                     -5.75,0.375 -5.75,0.375l0.125,0c-0.625,0 -1.125,0.375
-                     -1.313,0.937l0,0.063c0,0.062 0,0.125 -0.062,0.187c-0.063,0.625 -0.25,1.938
-                     -0.25,3.438c0,1.5 0.187,2.812 0.25,3.437c0,0.063 0,0.125
-                     0.062,0.188l0,0.062c0.188,0.563 0.688,0.938 1.313,0.938l-0.125,0c0,0
-                     2.437,0.375 5.75,0.375c3.25,0 5.75,-0.375 5.75,-0.375l-0.125,0c0.625,0
-                     1.125,-0.375 1.312,-0.938l0,-0.062c0,-0.063 0,-0.125
-                     0.063,-0.188c0.062,-0.625 0.25,-1.937 0.25,-3.437c0,-1.5 -0.125,-2.813
-                     -0.25,-3.438Zm-4.634,3.927l-3.201,2.315c-0.068,0.068 -0.137,0.068
-                     -0.205,0.068c-0.068,0 -0.136,0 -0.204,-0.068c-0.136,-0.068 -0.204,-0.204
-                     -0.204,-0.34l0,-4.631c0,-0.136 0.068,-0.273 0.204,-0.341c0.136,-0.068
-                     0.272,-0.068 0.409,0l3.201,2.316c0.068,0.068 0.136,0.204
-                     0.136,0.34c0.068,0.136 0,0.273 -0.136,0.341Z" style="fill: rgb(255, 255, 255);"></path>
-                    </g>
-                </svg>
-            </a>
-            <a href="/#" class="w-6 mx-1">
-                <svg class="fill-current cursor-pointer text-gray-500 hover:text-white" width="100%" height="100%"
-                    viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg"
-                    xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/"
-                    style="fill-rule: evenodd; clip-rule: evenodd; stroke-linejoin: round; stroke-miterlimit: 2;">
-                    <path id="Shape" d="M7.3,0.9c1.5,-0.6 3.1,-0.9 4.7,-0.9c1.6,0 3.2,0.3 4.7,0.9c1.5,0.6 2.8,1.5
-                  3.8,2.6c1,1.1 1.9,2.3 2.6,3.8c0.7,1.5 0.9,3 0.9,4.7c0,1.7 -0.3,3.2
-                  -0.9,4.7c-0.6,1.5 -1.5,2.8 -2.6,3.8c-1.1,1 -2.3,1.9 -3.8,2.6c-1.5,0.7
-                  -3.1,0.9 -4.7,0.9c-1.6,0 -3.2,-0.3 -4.7,-0.9c-1.5,-0.6 -2.8,-1.5
-                  -3.8,-2.6c-1,-1.1 -1.9,-2.3 -2.6,-3.8c-0.7,-1.5 -0.9,-3.1 -0.9,-4.7c0,-1.6
-                  0.3,-3.2 0.9,-4.7c0.6,-1.5 1.5,-2.8 2.6,-3.8c1.1,-1 2.3,-1.9
-                  3.8,-2.6Zm-0.3,7.1c0.6,0 1.1,-0.2 1.5,-0.5c0.4,-0.3 0.5,-0.8 0.5,-1.3c0,-0.5
-                  -0.2,-0.9 -0.6,-1.2c-0.4,-0.3 -0.8,-0.5 -1.4,-0.5c-0.6,0 -1.1,0.2
-                  -1.4,0.5c-0.3,0.3 -0.6,0.7 -0.6,1.2c0,0.5 0.2,0.9 0.5,1.3c0.3,0.4 0.9,0.5
-                  1.5,0.5Zm1.5,10l0,-8.5l-3,0l0,8.5l3,0Zm11,0l0,-4.5c0,-1.4 -0.3,-2.5
-                  -0.9,-3.3c-0.6,-0.8 -1.5,-1.2 -2.6,-1.2c-0.6,0 -1.1,0.2 -1.5,0.5c-0.4,0.3
-                  -0.8,0.8 -0.9,1.3l-0.1,-1.3l-3,0l0.1,2l0,6.5l3,0l0,-4.5c0,-0.6 0.1,-1.1
-                  0.4,-1.5c0.3,-0.4 0.6,-0.5 1.1,-0.5c0.5,0 0.9,0.2 1.1,0.5c0.2,0.3 0.4,0.8
-                  0.4,1.5l0,4.5l2.9,0Z"></path>
-                </svg>
-            </a>
-            <a href="/#" class="w-6 mx-1">
-                <svg class="fill-current cursor-pointer text-gray-500 hover:text-white" width="100%" height="100%"
-                    viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg"
-                    xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/"
-                    style="fill-rule: evenodd; clip-rule: evenodd; stroke-linejoin: round; stroke-miterlimit: 2;">
-                    <path id="Combined-Shape" d="M12,24c6.627,0 12,-5.373 12,-12c0,-6.627 -5.373,-12 -12,-12c-6.627,0
-                  -12,5.373 -12,12c0,6.627 5.373,12 12,12Zm6.591,-15.556l-0.722,0c-0.189,0
-                  -0.681,0.208 -0.681,0.385l0,6.422c0,0.178 0.492,0.323
-                  0.681,0.323l0.722,0l0,1.426l-4.675,0l0,-1.426l0.935,0l0,-6.655l-0.163,0l-2.251,8.081l-1.742,0l-2.222,-8.081l-0.168,0l0,6.655l0.935,0l0,1.426l-3.74,0l0,-1.426l0.519,0c0.203,0
-                  0.416,-0.145 0.416,-0.323l0,-6.422c0,-0.177 -0.213,-0.385
-                  -0.416,-0.385l-0.519,0l0,-1.426l4.847,0l1.583,5.704l0.042,0l1.598,-5.704l5.021,0l0,1.426Z"></path>
-                </svg>
-            </a>
-        </div>
-        <div class="my-5">© Copyright 2020. All Rights Reserved.</div>
-    </div>
-</div>
+  This component comes with some `rtl` classes. Please remove them if they are not needed in your project.
+-->
 
+<footer class="bg-white">
+    <div class="mx-auto max-w-screen-xl px-4 pb-6 pt-16 sm:px-6 lg:px-8 lg:pt-24">
+      <div class="grid grid-cols-1 gap-8 lg:grid-cols-3">
+        <div>
+          <div class="flex justify-center text-red-600 sm:justify-start">
+                <h3 class="font-black text-xl text-red-600 ">GUNUNG SEMBUNG PUTRA</h3>
+          </div>
+  
+          <p class="mt-6 max-w-md text-center font-medium leading-relaxed text-gray-600 sm:max-w-xs sm:text-left">
+            Sewa bus kami untuk perjalanan nyaman dan terpercaya, menjadikan setiap kegiatan kamu lebih berkesan
+          </p>
+  
+          <ul class="mt-8 flex justify-center gap-6 sm:justify-start md:gap-8">
+            <li>
+              <a
+                href="https://whas.me/pGKAFK57oe"
+                rel="noreferrer"
+                target="_blank"
+                class="text-red-700 transition hover:text-red-700/75"
+              >
+                <span class="sr-only">Whatsapp</span>
+                <svg class="w-6 h-6 text-red-600 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                    <path fill="currentColor" fill-rule="evenodd" d="M12 4a8 8 0 0 0-6.895 12.06l.569.718-.697 2.359 2.32-.648.379.243A8 8 0 1 0 12 4ZM2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10a9.96 9.96 0 0 1-5.016-1.347l-4.948 1.382 1.426-4.829-.006-.007-.033-.055A9.958 9.958 0 0 1 2 12Z" clip-rule="evenodd"/>
+                    <path fill="currentColor" d="M16.735 13.492c-.038-.018-1.497-.736-1.756-.83a1.008 1.008 0 0 0-.34-.075c-.196 0-.362.098-.49.291-.146.217-.587.732-.723.886-.018.02-.042.045-.057.045-.013 0-.239-.093-.307-.123-1.564-.68-2.751-2.313-2.914-2.589-.023-.04-.024-.057-.024-.057.005-.021.058-.074.085-.101.08-.079.166-.182.249-.283l.117-.14c.121-.14.175-.25.237-.375l.033-.066a.68.68 0 0 0-.02-.64c-.034-.069-.65-1.555-.715-1.711-.158-.377-.366-.552-.655-.552-.027 0 0 0-.112.005-.137.005-.883.104-1.213.311-.35.22-.94.924-.94 2.16 0 1.112.705 2.162 1.008 2.561l.041.06c1.161 1.695 2.608 2.951 4.074 3.537 1.412.564 2.081.63 2.461.63.16 0 .288-.013.4-.024l.072-.007c.488-.043 1.56-.599 1.804-1.276.192-.534.243-1.117.115-1.329-.088-.144-.239-.216-.43-.308Z"/>
+                </svg>                  
+              </a>
+            </li>
+  
+            <li>
+              <a
+                href="https://www.instagram.com/gunungsembungputra/profilecard/?igsh=MThyczNpY2ZqZG5sZw=="
+                rel="noreferrer"
+                target="_blank"
+                class="text-red-700 transition hover:text-red-700/75"
+              >
+                <span class="sr-only">Instagram</span>
+                <svg class="w-6 h-6 text-red-600 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                    <path fill="currentColor" fill-rule="evenodd" d="M3 8a5 5 0 0 1 5-5h8a5 5 0 0 1 5 5v8a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5V8Zm5-3a3 3 0 0 0-3 3v8a3 3 0 0 0 3 3h8a3 3 0 0 0 3-3V8a3 3 0 0 0-3-3H8Zm7.597 2.214a1 1 0 0 1 1-1h.01a1 1 0 1 1 0 2h-.01a1 1 0 0 1-1-1ZM12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm-5 3a5 5 0 1 1 10 0 5 5 0 0 1-10 0Z" clip-rule="evenodd"/>
+                </svg>                  
+              </a>
+            </li>
+
+            <li>
+                <a
+                  href="mailto:gunungsembungputra13@gmail.com"
+                  rel="noreferrer"
+                  target="_blank"
+                  class="text-red-700 transition hover:text-red-700/75"
+                >
+                  <span class="sr-only">Email</span>
+                  <svg class="w-6 h-6 text-red-600 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 13h3.439a.991.991 0 0 1 .908.6 3.978 3.978 0 0 0 7.306 0 .99.99 0 0 1 .908-.6H20M4 13v6a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-6M4 13l2-9h12l2 9M9 7h6m-7 3h8"/>
+                  </svg>                                  
+                  
+                </a>
+              </li>
+          </ul>
+        </div>
+  
+        <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-4 lg:col-span-2">
+          <div class="text-center sm:text-left">
+            <p class="text-lg font-medium text-gray-900">Tentang Kami</p>
+  
+            <ul class="mt-8 space-y-4 text-sm">
+            <li>
+                    <a class="text-gray-700 transition hover:text-gray-700/75" href="#">
+                    Visi dan Misi
+                    </a>
+            </li>
+            <li>
+                <a class="text-gray-700 transition hover:text-gray-700/75" href="#">
+                Sejarah Perusahaan
+                </a>
+            </li>
+            <li>
+                <a class="text-gray-700 transition hover:text-gray-700/75" href="#">
+                Keunggulan
+                </a>
+            </li>
+            <li>
+                <a class="text-gray-700 transition hover:text-gray-700/75" href="#">
+                Temui Tim Kami
+                </a>
+            </li>
+            </ul>
+
+          </div>
+  
+          <div class="text-center sm:text-left">
+            <p class="text-lg font-medium text-gray-900">Layanan Kami</p>
+  
+            <ul class="mt-8 space-y-4 text-sm">
+  
+              <li>
+                <a class="text-gray-700 transition hover:text-gray-700/75" href="#"> Paket Wisata </a>
+              </li>
+  
+              <li>
+                <a class="text-gray-700 transition hover:text-gray-700/75" href="#"> Diskusi Harga </a>
+              </li>
+  
+              <li>
+                <a class="text-gray-700 transition hover:text-gray-700/75" href="#"> Layanan Pelanggan </a>
+              </li>
+            </ul>
+          </div>
+
+  
+          <div class="text-center sm:text-left">
+            <p class="text-lg font-medium text-gray-900">Kontak Kami</p>
+  
+            <ul class="mt-8 space-y-4 text-sm">
+  
+              <li>
+                <a
+                  class="flex items-center justify-center gap-1.5 ltr:sm:justify-start rtl:sm:justify-end"
+                  href="#"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="size-5 shrink-0 text-gray-900"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                    />
+                  </svg>
+  
+                  <span class="flex-1 text-gray-700">+62 851-8970-0998</span>
+                </a>
+              </li>
+  
+              <li
+                class="flex items-start justify-center gap-1.5 ltr:sm:justify-start rtl:sm:justify-end"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="size-5 shrink-0 text-gray-900"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                  />
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                  />
+                </svg>
+  
+                <address class="-mt-0.5 flex-1 not-italic text-gray-700">
+                    Jl. Cinunuk No. 126 Kabupaten Bandung
+                </address>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+  
+      <div class="mt-12 border-t border-gray-100 pt-6">
+        <div class="text-center sm:flex sm:justify-between sm:text-left">
+          <p class="text-sm text-gray-500">
+            <span class="block sm:inline">All rights reserved.</span>
+  
+            <a
+              class="inline-block text-red-600 underline transition hover:text-red-600/75"
+              href="#"
+            >
+              Terms & Conditions
+            </a>
+  
+            <span>&middot;</span>
+  
+            <a
+              class="inline-block text-red-600 underline transition hover:text-red-600/75"
+              href="#"
+            >
+              Privacy Policy
+            </a>
+          </p>
+  
+          <p class="mt-4 text-sm text-gray-500 sm:order-first sm:mt-0">&copy; 2024 Gunung Sembung Putra</p>
+        </div>
+      </div>
+    </div>
+  </footer>
