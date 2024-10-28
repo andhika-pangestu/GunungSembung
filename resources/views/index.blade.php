@@ -53,7 +53,7 @@
       </div>
     </div>
 
-    <x-carousell></x-carousell>
+    <x-carousell :slides="$slides"/>
     
     
     
