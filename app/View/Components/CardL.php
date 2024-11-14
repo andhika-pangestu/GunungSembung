@@ -10,11 +10,13 @@ class CardL extends Component
 {
     public $image;
     public $title;
+    public $deskripsi;
 
-    public function __construct($image, $title)
+    public function __construct($image, $title, $deskripsi)
     {
         $this->image = $image;
         $this->title = $title;
+        $this->deskripsi = $deskripsi;
     }
 
     public function render()

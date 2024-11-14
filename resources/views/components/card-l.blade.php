@@ -1,8 +1,7 @@
-<div class="relative max-w-l mt-10 transition-transform duration-300 ease-in-out transform hover:scale-105">
-    <img class="h-64 w-full object-cover rounded-md" src="{{ $image }}" alt="{{ $title }}">
-    <div class="absolute inset-0 bg-gray-700 opacity-60 rounded-md"></div>
-    <div class="absolute inset-0 flex items-center justify-center">
-        <h2 class="text-white text-3xl font-bold">{{ $title }}</h2>
-    </div>
+
+<div class="relative isolate flex flex-col justify-end overflow-hidden rounded-2xl px-8 pb-8 pt-40 max-w-xl min-w-full mx-auto mt-2">
+    <img src="{{ $image }}" alt="{{ $title }}" class="absolute inset-0 h-full w-full object-cover">
+    <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40"></div>
+    <h3 class="z-10 mt-3 text-3xl font-bold text-white">{{ $title }}</h3>
+    <div class="z-10 capitalize gap-y-1 overflow-hidden text-sm leading-6 text-gray-300">{{ $deskripsi }}</div>
 </div>
-    
