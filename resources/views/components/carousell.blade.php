@@ -1,8 +1,16 @@
-<!-- resources/views/components/carousell.blade.php -->
+<div class="relative max-w-2xl mx-auto">
+    <!-- Left Arrow Button -->
+    <button type="button"
+        class="absolute top-1/2 -left-8 transform -translate-y-1/2 z-40 w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center hover:bg-gray-300 transition"
+        id="prev-slide">
+        <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+        </svg>
+    </button>
 
-<div class="max-w-2xl mx-auto">
+    <!-- Carousel Container -->
     <div id="custom-carousel" class="relative rounded-lg overflow-hidden shadow-lg">
-        <!-- Carousel wrapper -->
         <div class="relative h-80 md:h-96">
             @foreach ($slides as $index => $slide)
                 <div class="carousel-item {{ $index === 0 ? 'block' : 'hidden' }} duration-700 ease-in-out relative" data-carousel-item>
@@ -30,34 +38,26 @@
                 </div>
             @endforeach
         </div>
-
-        <!-- Slider indicators -->
-        <div class="flex absolute bottom-5 left-1/2 z-30 -translate-x-1/2 space-x-2">
-            @foreach ($slides as $index => $slide)
-                <button type="button" data-slide-to="{{ $index }}" class="carousel-indicator w-3 h-3 rounded-full bg-gray-300 hover:bg-gray-400 transition"></button>
-            @endforeach
-        </div>
-
-        <!-- Slider controls -->
-        <button type="button"
-            class="absolute top-1/2 left-3 z-40 w-10 h-10 bg-gray-200/50 rounded-full hover:bg-gray-300 transition"
-            id="prev-slide">
-            <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-            </svg>
-        </button>
-        <button type="button"
-            class="absolute top-1/2 right-3 z-40 w-10 h-10 bg-gray-200/50 rounded-full hover:bg-gray-300 transition"
-            id="next-slide">
-            <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-            </svg>
-        </button>
     </div>
 
-    <!-- Custom JavaScript for Carousel -->
+    <!-- Right Arrow Button -->
+    <button type="button"
+        class="absolute top-1/2 -right-8 transform -translate-y-1/2 z-40 w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center hover:bg-gray-300 transition"
+        id="next-slide">
+        <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+    </button>
+
+    <!-- Slider indicators below the carousel -->
+    <div class="flex justify-center mt-4 space-x-2">
+        @foreach ($slides as $index => $slide)
+            <button type="button" data-slide-to="{{ $index }}" class="carousel-indicator w-3 h-3 rounded-full bg-gray-300 hover:bg-gray-400 transition"></button>
+        @endforeach
+    </div>
+
+    <!-- JavaScript for Carousel -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const items = document.querySelectorAll('[data-carousel-item]');
@@ -92,11 +92,11 @@
                 });
             });
 
-            // Automatically switch slides every 5 seconds (optional)
+            // Automatically switch slides every 3 seconds
             setInterval(() => {
                 const nextIndex = (currentIndex + 1) % items.length;
                 showSlide(nextIndex);
-            }, 5000);
+            }, 3000);
         });
     </script>
 </div>
