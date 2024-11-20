@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css" rel="stylesheet">
     <title>@yield('title', 'Gunung Sembung')</title>
-    @vite('resources/css/app.css')</head>
+    @vite('resources/css/app.css')
+</head>
 <body class="font-helvetica">
     <header>
         @include('partials.header') <!-- Menyertakan header dari partials -->
