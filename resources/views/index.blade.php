@@ -30,31 +30,14 @@
         </div>
     </div>   
 
-    <main class="w-screen bg-yellow-50 flex flex-col items-center justify-start mt-10">
-        <h2 class="text-3xl font-bold text-left m-5 mt-5 text-gray-900 sm:text-4xl w-full pl-20">Temukan destinasi Favoritmu</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 container mt-1 pl-10">
-            <x-card 
-                image="https://images.pexels.com/photos/6157052/pexels-photo-6157052.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" 
-                title="Pineapple" 
-                location="Lorem ipsum" 
-            />
-            <x-card 
-                image="https://images.pexels.com/photos/5966630/pexels-photo-5966630.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" 
-                title="Banana" 
-                location="Lorem ipsum" 
-            />
-            <x-card 
-                image="https://images.pexels.com/photos/5217960/pexels-photo-5217960.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" 
-                title="Mango" 
-                location="Jawa timur" 
-            />
-            <x-card 
-                image="https://images.pexels.com/photos/14277667/pexels-photo-14277667.jpeg?" 
-                title="Bromo" 
-                location="Jawa Timur" 
-            />
-        </div>
-    </main>
+
+    </div>
+    <main class="w-screen flex flex-col items-center justify-start mt-10">
+      <x-bus-list></x-bus-list>
+    </div>
+
+    <x-carousell></x-carousell>
+
     <div class="fixed bottom-5 right-5 md:bottom-20 md:right-20 z-50">
         <a href="https://wa.me/123456789" 
            target="_blank" 
@@ -74,6 +57,4 @@
             <x-carousell :slides="$slides"/>
         </div>
     </div>
-    
-  
 @endsection
