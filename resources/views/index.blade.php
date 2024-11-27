@@ -27,7 +27,7 @@
         />
 
     </div>
-    <main class="w-screen bg-yellow-50 flex flex-col items-center justify-start mt-10">
+    <main class="w-screen flex flex-col items-center justify-start mt-10">
       <x-bus-list></x-bus-list>
     </div>
 
