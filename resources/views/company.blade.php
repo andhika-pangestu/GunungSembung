@@ -1,3 +1,8 @@
+@extends('layouts.company')
+
+@section('title', 'Tentang') 
+
+@section('content')
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 <!-- Sejarah Perusahaan -->
 <section id="sejarah" class="bg-white p-8 rounded-lg pt-20">
@@ -153,3 +158,4 @@
     </section>
     
 </main>
+@endsection
