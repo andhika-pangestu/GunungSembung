@@ -5,3 +5,4 @@ use App\Http\Controllers\HomeController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/tour-packages', [HomeController::class, 'allTourPackages'])->name('tour-packages');
+
