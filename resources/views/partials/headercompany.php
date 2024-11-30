@@ -1,17 +1,20 @@
 <section class="w-full px-8 text-gray-700 bg-white fixed z-50">
-    <div class="container flex flex-col items-center justify-between py-5 mx-auto md:flex-row max-w-7xl">
-        <div class="relative flex w-full justify-between">
-            <!-- Logo GSP di kiri -->
-            <a href="#_" class="flex items-center mb-5 font-medium text-gray-900 lg:w-auto lg:items-center lg:justify-center md:mb-0">
-                <span class="text-xl font-black leading-none text-red-600 select-none">GUNUNG SEMBUNG PUTRA</span>
-            </a>
-            
-            <!-- Navigasi di kanan -->
-            <nav class="flex flex-wrap items-center text-base ml-auto">
-                    <a href="#sejarah" class="mr-10 font-medium leading-6 text-gray-600 hover:text-gray-900">Sejarah</a>
-                    <a href="#keunggulan" class="mr-10 font-medium leading-6 text-gray-600 hover:text-gray-900">Keunggulan</a>
-                    <a href="#tim" class="mr-10 font-medium leading-6 text-gray-600 hover:text-gray-900">Tim Kami</a>
-            </nav>
-        </div>
+    <div class="container flex items-center justify-between py-5 mx-auto md:flex-row max-w-7xl">
+        <!-- Logo -->
+        <a href="#_" class="text-xl font-black leading-none text-red-600">GUNUNG SEMBUNG PUTRA</a>
+
+        <!-- Hamburger Button (Mobile) -->
+        <button id="menu-toggle" class="block md:hidden ml-auto focus:outline-none">
+            <svg class="w-6 h-6 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+            </svg>
+        </button>
+
+        <!-- Navigasi -->
+        <nav id="menu" class="hidden md:flex flex-col md:flex-row md:space-x-10 w-full md:w-auto mt-5 md:mt-0 md:items-center">
+            <a href="#sejarah" class="block py-2 font-medium text-gray-600 hover:text-gray-900 md:py-0">Sejarah</a>
+            <a href="#keunggulan" class="block py-2 font-medium text-gray-600 hover:text-gray-900">Keunggulan</a>
+            <a href="#tim" class="block py-2 font-medium text-gray-600 hover:text-gray-900 md:py-0">Tim Kami</a>
+        </nav>
     </div>
 </section>

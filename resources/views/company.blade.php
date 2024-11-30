@@ -56,7 +56,7 @@
 </section>
 
     <!-- Keunggulan -->
-    <section id="keunggulan" class="bg-gray-50 py-12">
+    <section id="keunggulan" class="bg-gray-50 py-12 p-8 pt-20">
         <div class="container mx-auto px-6">
             <h2 class="text-3xl font-extrabold text-red-500 pb-4 mb-6">
                 Keunggulan Kami
