@@ -89,7 +89,7 @@
         
                 <!-- WhatsApp Button -->
                 <div class="mt-6 flex justify-end">
-                    <a href="https://wa.me/1234567890" target="_blank" class="inline-flex items-center space-x-2">
+                    <a href="https://wa.me/6285189700998?text=Hallo%20saya%20ingin%20bertanya%20seputar%20booking%20JETBUS" target="_blank" class="inline-flex items-center space-x-2">
                         <button
                             class="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-5 rounded-full inline-flex items-center focus:outline-none focus:ring-2 focus:ring-green-400">
                             <svg id="fi_15707820" enable-background="new 0 0 1000 1000" viewBox="0 0 1000 1000"
@@ -202,7 +202,7 @@
         
                 <!-- WhatsApp Button -->
                 <div class="mt-6 flex justify-end">
-                    <a href="https://wa.me/1234567890" target="_blank" class="inline-flex items-center space-x-2">
+                    <a href="https://wa.me/6285189700998?text=Hallo%20saya%20ingin%20bertanya%20seputar%20booking%20JETBUS" target="_blank" class="inline-flex items-center space-x-2">
                         <button
                             class="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-5 rounded-full inline-flex items-center focus:outline-none focus:ring-2 focus:ring-green-400">
                             <svg id="fi_15707820" enable-background="new 0 0 1000 1000" viewBox="0 0 1000 1000"

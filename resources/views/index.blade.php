@@ -19,10 +19,10 @@
                 deskripsi="Pilihan yang tepat untuk anda yang ingin rental bus untuk keperluan Trip" 
             />
             <x-card-l 
-                image="https://images.unsplash.com/photo-1526494631344-8c6fa6462b17?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
-                title="Bus untuk Ziarah" 
-                deskripsi="Untuk anda yang akan melakukan perjalan ziarah ke tempat tempat sakral" 
-            />
+            image="https://images.unsplash.com/photo-1526494631344-8c6fa6462b17?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+            title="Bus untuk Studi Tour" 
+            deskripsi="Bus yang nyaman dan aman untuk perjalanan studi tour, dilengkapi fasilitas terbaik untuk pengalaman tak terlupakan." 
+        />
             <x-card-l 
                 image="https://images.unsplash.com/photo-1526494631344-8c6fa6462b17?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
                 title="Wisata hingga Luar Pulau Jawa" 
@@ -45,12 +45,17 @@
         </div>
     </div>
 
-    <div class="fixed bottom-5 right-5 md:bottom-20 md:right-20 z-50 flex items-center space-x-3">
+    <div class="fixed bottom-5 right-5 md:bottom-20 md:right-20 z-50 flex flex-col items-center space-y-3">
         <!-- Judul -->
-        <h1 class="text-lg md:text-xl font-bold text-gray-800 text-left">Hubungi Kami</h1>
+        <h1 class="text-lg md:text-xl font-bold text-gray-800 text-center relative">
+            <span class="bg-gradient-to-r from-red-500 to-red-700 text-transparent bg-clip-text">
+                Hubungi Kami
+            </span>
+            <span class="absolute inset-x-0 -bottom-1 h-1 bg-gradient-to-r from-red-500 to-red-700 rounded"></span>
+        </h1>
     
         <!-- Tombol WhatsApp -->
-        <a href="https://wa.me/123456789" 
+        <a href="https://wa.me/6285189700998?text=Halo%2C%20Saya%20ingin%20bertanya%20mengenai%20pemesanan%20BUS%20di%20PT%20Gunung%20Sembung%20Putra" 
            target="_blank" 
            class="flex items-center justify-center w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-green-400 to-green-500 border-4 border-white rounded-full shadow-2xl transition-transform transform hover:scale-125 hover:shadow-[0_0_20px_rgba(72,189,129,0.8)] hover:border-green-300">
             <img src="{{ asset('images/whatsapp.svg') }}" 
@@ -58,6 +63,5 @@
                  class="w-8 h-8 md:w-10 md:h-10">
         </a>
     </div>
-    
     
 @endsection
