@@ -3,7 +3,7 @@
 @section('title', 'All Tour Packages')
 
 @section('content')
-    <main class="w-screen bg-gray-50 flex flex-col items-center justify-start mt-10">
+    <main class="w-screen bg-gray-50 flex flex-col items-center justify-start mt-0">
         <h2 class="text-3xl font-bold text-left m-5 mt-5 text-gray-900 sm:text-4xl w-full pl-20">Semua Paket Wisata</h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4 container mt-1">
             @foreach ($slides as $slide)
