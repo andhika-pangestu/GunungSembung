@@ -30,8 +30,9 @@
                         <!-- Price and Button Section -->
                         <div class="flex items-center space-x-4">
                             <span class="bg-white bg-opacity-70 text-red-600 font-semibold px-4 py-2 rounded-lg">{{ $slide['price'] }}</span>
-                            <a href="{{ $slide['button_link'] }}" class="bg-red-500 hover:bg-red-600 text-white font-semibold px-6 py-2 rounded-lg">
-                                {{ $slide['button_text'] }}
+                            <a href="{{ $slide['button_link'] }}" target="_blank" class="bg-red-500 hover:bg-red-600 text-white font-semibold px-6 py-2 rounded-lg flex items-center justify-center">
+                                {{ $slide['button_text'] }} &nbsp;
+                                <img src = "https://upload.wikimedia.org/wikipedia/commons/5/5e/WhatsApp_icon.png" alt = "WA" class="w-7 h-7 mr-2">
                             </a>
                         </div>
                     </div>

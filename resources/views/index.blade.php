@@ -56,7 +56,7 @@
     <div class="w-screen bg-gray-50 flex flex-col items-center mt-10">
         <div class="flex flex-row justify-between items-center w-full px-20">
             <h2 class="text-3xl font-bold text-gray-900 sm:text-4xl">One Day Tour</h2>
-            <a href="{{ route('tour-packages') }}" class="text-base font-medium text-gray-900 sm:text-base">Lihat Semua</a>
+            <a href="{{ route('tour-packages') }}" class="text-base font-medium text-gray-900 sm:text-base hover= underline">Lihat Semua</a>
         </div>
         <div class="w-5/6 mt-8">
             <x-carousell :slides="$slides"/>

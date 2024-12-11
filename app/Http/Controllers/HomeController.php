@@ -19,6 +19,19 @@ class homeController extends Controller
                     'Tiket terusan DUFAN',
                     'Tour Leader Service (Tentative)',
                     'Dan Lainnya'
+                [
+                    'image' => 'https://s-light.tiket.photos/t/01E25EBZS3W0FY9GTG6C42E1SE/rsfit19201280gsm/events/2024/08/13/0690e857-3357-4cf3-b5b5-eba744f6a784-1723534166661-a4d73af005989d6f43f3863990e8db2c.jpg',
+                    'title' => 'Paket Wisata Dufan 2024',
+                    'features' => [
+                        'Transportasi Elf Ac Pariwisata',
+                        'Tiket masuk Gerbang Ancol',
+                        'Tiket terusan DUFAN',
+                        'Tour Leader Service (Tentative)',
+                        'Dan Lainnya'
+                    ],
+                    'price' => 'Starts from : IDR 363.000,-',
+                    'button_text' => 'Selengkapnya: ',
+                    'button_link' => 'https://wa.me/6285189700998?text=Halo,%20Saya%20tertarik%20dengan%20Paket%20Wisata%20Dufan%202024.%20Bisakah%20Anda%20berikan%20info%20lebih%20lanjut?'
                 ],
                 'price' => 'Starts from : IDR 363.000,-',
                 'button_text' => 'Selengkapnya',
@@ -38,6 +51,8 @@ class homeController extends Controller
                 'price' => 'Starts from : IDR 560.000,-',
                 'button_text' => 'Selengkapnya',
                 'button_link' => '#'
+                'button_text' => 'Selengkapnya: ',
+                'button_link' => 'https://wa.me/6285189700998?text=Halo,%20Saya%20tertarik%20dengan%20Paket%20Wisata%20Dufan%202024.%20Bisakah%20Anda%20berikan%20info%20lebih%20lanjut?'
             ],
             [
                 'image' => 'https://busdiscovery.id/wp-content/uploads/2020/11/8-Rekomendasi-Tempat-Wisata-Pangandaran-Yang-Eksotis-1.jpg',
@@ -54,11 +69,15 @@ class homeController extends Controller
                 'button_text' => 'Selengkapnyaa',
                 'button_link' => '#'
             ]
+                'button_text' => 'Selengkapnya: ',
+                'button_link' => 'https://wa.me/6285189700998?text=Halo,%20Saya%20tertarik%20dengan%20Paket%20Wisata%20Dufan%202024.%20Bisakah%20Anda%20berikan%20info%20lebih%20lanjut?'
+                ]
 
         ];
     
         return view('index', compact('slides'));
     }
+     }
 
 public function allTourPackages()
 {
@@ -76,6 +95,8 @@ public function allTourPackages()
             'price' => 'Starts from : IDR 363.000,-',
             'button_text' => 'Selengkapnya',
             'button_link' => '#',
+            'button_text' => 'Pesan Sekarang ',
+            'button_link' => 'https://wa.me/6285189700998?text=Halo,%20Saya%20tertarik%20dengan%20Paket%20Wisata%20Dufan%202024.%20Bisakah%20Anda%20berikan%20info%20lebih%20lanjut?'
         ],
         [
             'image' => 'https://asset.kompas.com/crops/oYMCkVt6GrjFlHD0-ehMleF_wyw=/2x0:1000x665/750x500/data/photo/2022/07/02/62c071947729c.jpg',
@@ -90,6 +111,8 @@ public function allTourPackages()
             'price' => 'Starts from : IDR 560.000,-',
             'button_text' => 'Selengkapnya',
             'button_link' => '#',
+            'button_text' => 'Pesan Sekarang ',
+            'button_link' => 'https://wa.me/6285189700998?text=Halo,%20Saya%20tertarik%20dengan%20Paket%20Wisata%20Dufan%202024.%20Bisakah%20Anda%20berikan%20info%20lebih%20lanjut?'
         ],
         [
             'image' => 'https://busdiscovery.id/wp-content/uploads/2020/11/8-Rekomendasi-Tempat-Wisata-Pangandaran-Yang-Eksotis-1.jpg',
@@ -105,6 +128,8 @@ public function allTourPackages()
             'price' => 'Starts from : IDR 499.000,-',
             'button_text' => 'Selengkapnya',
             'button_link' => '#',
+            'button_text' => 'Pesan Sekarang ',
+            'button_link' => 'https://wa.me/6285189700998?text=Halo,%20Saya%20tertarik%20dengan%20Paket%20Wisata%20Dufan%202024.%20Bisakah%20Anda%20berikan%20info%20lebih%20lanjut?'
         ],
         // Tambahkan data hingga mencapai 9 item
         [
@@ -114,6 +139,8 @@ public function allTourPackages()
             'price' => 'Starts from : IDR 899.000,-',
             'button_text' => 'Selengkapnya',
             'button_link' => '#',
+            'button_text' => 'Pesan Sekarang ',
+            'button_link' => 'https://wa.me/6285189700998?text=Halo,%20Saya%20tertarik%20dengan%20Paket%20Wisata%20Dufan%202024.%20Bisakah%20Anda%20berikan%20info%20lebih%20lanjut?'
         ],
         [
             'image' => 'https://ik.imagekit.io/tvlk/blog/2022/09/Wisata-Gunung-Bromo-Traveloka-Xperience-1.jpg?tr=dpr-2,w-675',
@@ -122,6 +149,8 @@ public function allTourPackages()
             'price' => 'Starts from : IDR 799.000,-',
             'button_text' => 'Selengkapnya',
             'button_link' => '#',
+            'button_text' => 'Pesan Sekarang ',
+            'button_link' => 'https://wa.me/6285189700998?text=Halo,%20Saya%20tertarik%20dengan%20Paket%20Wisata%20Dufan%202024.%20Bisakah%20Anda%20berikan%20info%20lebih%20lanjut?'
         ],
         [
             'image' => 'https://cekunganbandung.jabarprov.go.id/wp-content/uploads/2022/02/gesat-2.jpg',
@@ -130,6 +159,8 @@ public function allTourPackages()
             'price' => 'Starts from : IDR 1.099.000,-',
             'button_text' => 'Selengkapnya',
             'button_link' => '#',
+            'button_text' => 'Pesan Sekarang ',
+            'button_link' => 'https://wa.me/6285189700998?text=Halo,%20Saya%20tertarik%20dengan%20Paket%20Wisata%20Dufan%202024.%20Bisakah%20Anda%20berikan%20info%20lebih%20lanjut?'
         ],
         [
             'image' => 'https://static.promediateknologi.id/crop/0x0:0x0/750x500/webp/photo/ayobandung/images-bandung/post/articles/2020/06/01/91191/ayobdg_tahura-djuanda-ditutup_kavin-faza2.jpg',
@@ -138,6 +169,8 @@ public function allTourPackages()
             'price' => 'Starts from : IDR 699.000,-',
             'button_text' => 'Selengkapnya',
             'button_link' => '#',
+            'button_text' => 'Pesan Sekarang ',
+            'button_link' => 'https://wa.me/6285189700998?text=Halo,%20Saya%20tertarik%20dengan%20Paket%20Wisata%20Dufan%202024.%20Bisakah%20Anda%20berikan%20info%20lebih%20lanjut?'
         ],
         [
             'image' => 'https://s-light.tiket.photos/t/01E25EBZS3W0FY9GTG6C42E1SE/rsfit19201280gsm/events/2024/08/14/594c6072-d53a-4eef-9285-6d69ef1f725a-1723625448894-4199040f8fc0597a41415949abcfef1b.jpg',
@@ -146,6 +179,8 @@ public function allTourPackages()
             'price' => 'Starts from : IDR 1.299.000,-',
             'button_text' => 'Selengkapnya',
             'button_link' => '#',
+            'button_text' => 'Pesan Sekarang ',
+            'button_link' => 'https://wa.me/6285189700998?text=Halo,%20Saya%20tertarik%20dengan%20Paket%20Wisata%20Dufan%202024.%20Bisakah%20Anda%20berikan%20info%20lebih%20lanjut?'
         ],
         [
             'image' => 'https://static.promediateknologi.id/crop/0x0:0x0/0x0/webp/photo/p2/222/2024/10/05/WhatsApp-Image-2024-09-30-at-154900-3719372467.jpeg',
@@ -154,6 +189,8 @@ public function allTourPackages()
             'price' => 'Starts from : IDR 899.000,-',
             'button_text' => 'Selengkapnya',
             'button_link' => '#',
+            'button_text' => 'Pesan Sekarang ',
+            'button_link' => 'https://wa.me/6285189700998?text=Halo,%20Saya%20tertarik%20dengan%20Paket%20Wisata%20Dufan%202024.%20Bisakah%20Anda%20berikan%20info%20lebih%20lanjut?'
         ],
     ];
 

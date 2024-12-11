@@ -16,9 +16,12 @@
                                 <li>- {{ $feature }}</li>
                             @endforeach
                         </ul>
-                        <p class="text-sm font-bold text-gray-800 mt-4">{{ $slide['price'] }}</p>
-                        <a href="{{ $slide['button_link'] }}" class="mt-2 inline-block text-blue-500 font-medium hover:underline">
-                            {{ $slide['button_text'] }}
+                        <div class="flex items-center space-x-4">
+                            <span class="text-sm font-bold text-gray-800 mt-4">{{ $slide['price'] }}</span>
+                        </div>
+                        <a href="{{ $slide['button_link'] }}" target="_blank" class="bg-red-500 hover:bg-red-600 text-white text-sm font-semibold px-5 py-1 mt-4 rounded-lg flex items-center justify-center">
+                            {{ $slide['button_text'] }} &nbsp;
+                            <img src = "https://upload.wikimedia.org/wikipedia/commons/5/5e/WhatsApp_icon.png" alt = "WA" class="w-7 h-7 mr-2">
                         </a>
                     </div>
                 </div>
