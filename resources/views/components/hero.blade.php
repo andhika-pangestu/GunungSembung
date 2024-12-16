@@ -78,7 +78,7 @@
                         memuaskan untuk keperluan wisata anda
                     </p>
                     <div class="relative flex flex-col sm:flex-row sm:space-x-4">
-                        <a href="#_"
+                        <a href="#bus"
                             class="flex items-center w-full px-6 py-3 mb-3 text-lg text-white bg-red-600 rounded-xl sm:mb-0 hover:bg-red-700 sm:w-auto">
                             Cek List Bis
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 ml-1" viewBox="0 0 24 24"
@@ -88,7 +88,7 @@
                                 <polyline points="12 5 19 12 12 19"></polyline>
                             </svg>
                         </a>
-                        <a href="#_"
+                        <a href="#about"
                             class="flex items-center px-6 py-3 text-gray-500 bg-gray-100 rounded-xl hover:bg-gray-200 hover:text-gray-600">
                             Learn More
                         </a>
@@ -101,7 +101,8 @@
                     <div class="swiper-container h-80 relative">
                         <div class="swiper-wrapper">
                             <div class="swiper-slide">
-                                <img src="{{ asset('hero-img/Bis3.jpg ') }}" alt="Image 1"  class="w-full h-full object-fill">
+                                <img src="{{ asset('images/kolase.jpg') }}" alt="Image 1"
+                                    class="w-full h-full object-fill">
                             </div>
                             <div class="swiper-slide">
                                 <img src="{{ asset('hero-img/Bis2.jpg') }}" alt="Image 2"
@@ -113,6 +114,14 @@
                             </div>
                             <div class="swiper-slide">
                                 <img src="{{ asset('hero-img/Sign1.jpg') }}" alt="Image 4"
+                                    class="w-full h-full object-fill">
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="{{ asset('images/LeftBus.jpg') }}" alt="Image 2"
+                                    class="w-full h-full object-fill">
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="{{ asset('images/4bus.jpg') }}" alt="Image 2"
                                     class="w-full h-full object-fill">
                             </div>
                             <!-- Add more slides as needed -->
