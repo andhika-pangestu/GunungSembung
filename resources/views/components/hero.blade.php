@@ -1,25 +1,6 @@
 <!-- Include Swiper's CSS -->
 <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
 
-<!-- Include Swiper's JS -->
-<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-
-<style>
-    .swiper-button-next, .swiper-button-prev {
-      color: white; /* Change the color of the buttons if needed */
-      top: 50%;
-      transform: translateY(-50%);
-      width: 30px;
-      height: 30px;
-    }
-    .swiper-button-next {
-      right: 300px; /* Adjust the distance from the right edge */
-    }
-    .swiper-button-prev {
-      left: 870px; /* Adjust the distance from the left edge */
-    }
-  </style>
-
 <!-- Section 2 -->
 <section class="relative px-2 py-32 bg-cover bg-center bg-no-repeat" style=" background-image: url('{{ asset('hero-img/Bis1.jpg') }}');">
   <div class="container items-center max-w-6xl px-8 mx-auto xl:px-5">
@@ -55,44 +36,49 @@
             <div class="w-full md:w-1/2">
                 <div class="w-full h-auto overflow-hidden rounded-md shadow-xl sm:rounded-xl">
                     <!-- Swiper -->
-                    <div class="swiper-container h-80">
+                    <div class="swiper-container h-80 relative">
                         <div class="swiper-wrapper">
                             <div class="swiper-slide">
-                                <img src="{{ asset('hero-img/BisStuck.jpg') }}" alt="Image 1"  class="w-full h-full object-fill">
+                                <img src="{{ asset('hero-img/Bis3.jpg ') }}" alt="Image 1"  class="w-full h-full object-fill">
                             </div>
                             <div class="swiper-slide">
                                 <img src="{{ asset('hero-img/Bis2.jpg') }}" alt="Image 2"  class="w-full h-full object-fill">
                             </div>
                             <div class="swiper-slide">
-                                <img src="{{ asset('hero-img/Bis3.jpg') }}" alt="Image 3"  class="w-full h-full object-fill">
+                                <img src="{{ asset('hero-img/BisStuck.jpg') }}" alt="Image 3"  class="w-full h-full object-fill">
                             </div>
                             <div class="swiper-slide">
                                 <img src="{{ asset('hero-img/Sign1.jpg') }}" alt="Image 4"  class="w-full h-full object-fill">
                             </div>
                             <!-- Add more slides as needed -->
                         </div>
-
-                        <!-- Add Navigation -->
-                        <div class="swiper-button-next"></div>
-                        <div class="swiper-button-prev"></div>
+                        <!-- Add Pagination -->
+                        <div class="swiper-pagination"></div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
+
+<!-- Include Swiper's JS -->
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+
+<!-- Initialize Swiper -->
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      var swiper = new Swiper('.swiper-container', {
-        loop: true,
-        pagination: {
-          el: '.swiper-pagination',
-          clickable: true,
-        },
-        navigation: {
-          nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev',
-        },
-      });
+  document.addEventListener('DOMContentLoaded', function () {
+    var swiper = new Swiper('.swiper-container', {
+      loop: true,
+      autoplay: {
+        delay: 5000, // 1 second delay
+        disableOnInteraction: false,
+      },
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
     });
-  </script>
+  });
+</script>
