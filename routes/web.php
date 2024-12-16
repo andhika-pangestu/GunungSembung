@@ -5,8 +5,9 @@ use App\Http\Controllers\HomeController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/pages/tour-packages', [HomeController::class, 'allTourPackages'])->name('tour-packages');
-Route::get('/pages/company', function () {
-    return view('company');
+Route::get('/company', function () {
+    return view('pages.company');
 })->name('company');
+
 
 

@@ -9,7 +9,7 @@
     @vite('resources/css/app.css')</head>
 <body class="font-helvetica">
     <header>
-        @include('partials.header-company') <!-- Menyertakan header dari partials -->
+        @include('partials.headercompany') <!-- Menyertakan header dari partials -->
     </header>
 
     <!-- Konten Utama -->
