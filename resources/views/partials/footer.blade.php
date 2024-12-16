@@ -69,22 +69,17 @@
   
             <ul class="mt-8 space-y-4 text-sm">
             <li>
-                    <a class="text-gray-700 transition hover:text-gray-700/75" href="#">
-                    Visi dan Misi
-                    </a>
-            </li>
-            <li>
-                <a class="text-gray-700 transition hover:text-gray-700/75" href="#">
+                <a class="text-gray-700 transition hover:text-gray-700/75" href="/company">
                 Sejarah Perusahaan
                 </a>
             </li>
             <li>
-                <a class="text-gray-700 transition hover:text-gray-700/75" href="#">
+                <a class="text-gray-700 transition hover:text-gray-700/75" href="/company">
                 Keunggulan
                 </a>
             </li>
             <li>
-                <a class="text-gray-700 transition hover:text-gray-700/75" href="#">
+                <a class="text-gray-700 transition hover:text-gray-700/75" href="/company">
                 Temui Tim Kami
                 </a>
             </li>

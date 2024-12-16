@@ -4,11 +4,19 @@
         <div class="grid grid-cols-1 md:grid-cols-2 items-center gap-5">
             <div class="w-11/12 text-justify">
                 <h3 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">{{ $CompanyName }}</h3>
-                <p class="text-lg text-gray-600">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vehicula, sapien at pretium malesuada, velit libero suscipit metus, non convallis nulla eros a orci. Sed posuere justo nec fermentum faucibus. Cras accumsan, eros sit amet sollicitudin hendrerit, urna urna tincidunt erat, sit amet bibendum turpis libero id risus. Nulla malesuada quam ut lacus vehicula, vitae interdum elit elementum. Integer euismod scelerisque libero, nec tempor justo vehicula et. Fusce rhoncus, magna sit amet ullamcorper cursus, tortor dui posuere lorem, sed aliquet erat orci a nulla. Aenean eu justo sit amet erat elementum feugiat nec in libero. Aliquam erat volutpat. Curabitur at tellus turpis.</p>
+                <p class="text-base text-gray-600">
+                    PT Gunung Sembung Putra, yang berlokasi di Jl. Cinunuk No. 126, Kabupaten Bandung, menyediakan layanan sewa bus Tebraik untuk perjalanan antar kota, tour, dan transportasi bisnis. Armada kami yang terawat dan sopir berpengalaman siap mengantar Anda ke tujuan dengan aman, nyaman, dan tepat waktu.
+                </p>
+                
+                <p class="text-base text-gray-600 mt-2">
+                    Kami menawarkan harga kompetitif dan layanan fleksibel, selalu mengutamakan kenyamanan dan kepuasan pelanggan. Hubungi kami untuk pemesanan atau informasi lebih lanjut, dan biarkan kami menjadi mitra perjalanan Anda yang andal.
+                </p>
+                
+                
             </div>
             <div>
-                <img src="https://plus.unsplash.com/premium_photo-1664302152991-d013ff125f3f?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="About Us Image" class="rounded-xl shadow-md object-cover">
-            </div>
+                <img src="{{ asset('images/kolase.jpg') }}" alt="Kolase">
+            </div>            
         </div>
     </div>
 </section>
