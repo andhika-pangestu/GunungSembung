@@ -3,7 +3,6 @@
 @section('title', 'All Tour Packages')
 
 @section('content')
-    <main class="w-screen bg-gray-50 flex flex-col items-center justify-start mt-0">
     <main class="w-screen bg-gray-50 flex flex-col items-center justify-start mt-10">
         <h2 class="text-3xl font-bold text-left m-5 mt-5 text-gray-900 sm:text-4xl w-full pl-20">Semua Paket Wisata</h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4 container mt-1">
@@ -17,10 +16,6 @@
                                 <li>- {{ $feature }}</li>
                             @endforeach
                         </ul>
-                        <p class="text-sm font-bold text-gray-800 mt-4">{{ $slide['price'] }}</p>
-                        <a href="{{ $slide['button_link'] }}"
-                            class="mt-2 inline-block text-blue-500 font-medium hover:underline">
-                            {{ $slide['button_text'] }}
                         <div class="flex items-center space-x-4">
                             <span class="text-sm font-bold text-gray-800 mt-4">{{ $slide['price'] }}</span>
                         </div>

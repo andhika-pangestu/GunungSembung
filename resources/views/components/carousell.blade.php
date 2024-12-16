@@ -13,28 +13,26 @@
     <div id="custom-carousel" class="relative rounded-lg overflow-hidden shadow-lg">
         <div class="relative h-80 md:h-96">
             @foreach ($slides as $index => $slide)
-                <div class="carousel-item {{ $index === 0 ? 'block' : 'hidden' }} duration-700 ease-in-out relative"
-                    data-carousel-item>
+                <div class="carousel-item {{ $index === 0 ? 'block' : 'hidden' }} duration-700 ease-in-out relative" data-carousel-item>
                     <!-- Background Image -->
                     <img src="{{ $slide['image'] }}" class="object-cover w-full h-full" alt="{{ $slide['title'] }}">
-
+                    
                     <!-- Overlay with text content -->
                     <div class="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-center px-8">
                         <h2 class="text-white text-4xl font-bold mb-4">{{ $slide['title'] }}</h2>
-
+                        
                         <ul class="text-white text-lg mb-4 space-y-1">
                             @foreach ($slide['features'] as $feature)
                                 <li>{{ $loop->iteration }}. {{ $feature }}</li>
                             @endforeach
                         </ul>
-
+                        
                         <!-- Price and Button Section -->
                         <div class="flex items-center space-x-4">
-                            <span
-                                class="bg-white bg-opacity-70 text-red-600 font-semibold px-4 py-2 rounded-lg">{{ $slide['price'] }}</span>
-                            <a href="{{ $slide['button_link'] }}"
-                                class="bg-red-500 hover:bg-red-600 text-white font-semibold px-6 py-2 rounded-lg">
-                                {{ $slide['button_text'] }}
+                            <span class="bg-white bg-opacity-70 text-red-600 font-semibold px-4 py-2 rounded-lg">{{ $slide['price'] }}</span>
+                            <a href="{{ $slide['button_link'] }}" target="_blank" class="bg-red-500 hover:bg-red-600 text-white font-semibold px-6 py-2 rounded-lg flex items-center justify-center">
+                                {{ $slide['button_text'] }} &nbsp;
+                                <img src = "https://upload.wikimedia.org/wikipedia/commons/5/5e/WhatsApp_icon.png" alt = "WA" class="w-7 h-7 mr-2">
                             </a>
                         </div>
                     </div>
@@ -56,8 +54,7 @@
     <!-- Slider indicators below the carousel -->
     <div class="flex justify-center mt-4 space-x-2">
         @foreach ($slides as $index => $slide)
-            <button type="button" data-slide-to="{{ $index }}"
-                class="carousel-indicator w-3 h-3 rounded-full bg-gray-300 hover:bg-gray-400 transition"></button>
+            <button type="button" data-slide-to="{{ $index }}" class="carousel-indicator w-3 h-3 rounded-full bg-gray-300 hover:bg-gray-400 transition"></button>
         @endforeach
     </div>
 
