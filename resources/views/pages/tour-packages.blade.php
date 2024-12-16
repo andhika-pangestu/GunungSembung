@@ -17,7 +17,8 @@
                             @endforeach
                         </ul>
                         <p class="text-sm font-bold text-gray-800 mt-4">{{ $slide['price'] }}</p>
-                        <a href="{{ $slide['button_link'] }}" class="mt-2 inline-block text-blue-500 font-medium hover:underline">
+                        <a href="{{ $slide['button_link'] }}"
+                            class="mt-2 inline-block text-blue-500 font-medium hover:underline">
                             {{ $slide['button_text'] }}
                         </a>
                     </div>

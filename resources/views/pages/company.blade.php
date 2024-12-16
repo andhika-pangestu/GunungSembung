@@ -1,4 +1,4 @@
-@extends('layouts.company')
+@extends('layouts.company-layout')
 
 @section('title', 'Tentang') 
 
