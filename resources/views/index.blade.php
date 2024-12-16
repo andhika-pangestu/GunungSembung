@@ -86,6 +86,7 @@
                     });
                 }
             }
+
     
             // Hamburger Menu Toggle
             const menuToggle = document.getElementById('menu-toggle');
