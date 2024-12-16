@@ -26,6 +26,7 @@
 
     <!-- JavaScript -->
     @vite('resources/js/app.js');
+    <script src="{{ mix('js/scroll.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.10.2/cdn.min.js" defer></script>
     
 </body>

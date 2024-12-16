@@ -54,24 +54,10 @@ document.addEventListener('DOMContentLoaded', function () {
  });
  
 
- // Script untuk toggle menu
-document.getElementById('menu-toggle').addEventListener('click', function () {
-   const menu = document.getElementById('menu');
-   menu.classList.toggle('hidden'); // Menambah/menghapus kelas 'hidden' untuk menu
+ document.getElementById("menu-toggle").addEventListener("click", function() {
+   const menu = document.getElementById("menu");
+   menu.classList.toggle("hidden");
 });
 
 
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-   anchor.addEventListener('click', function (e) {
-       e.preventDefault(); // Mencegah aksi default klik link
-
-       const target = document.querySelector(this.getAttribute('href'));
-       if (target) {
-           target.scrollIntoView({
-               behavior: 'smooth', // Scroll dengan efek halus
-               block: 'start'     // Mulai scroll ke bagian atas elemen
-           });
-       }
-   });
-});
 

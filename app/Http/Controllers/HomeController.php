@@ -157,7 +157,7 @@ public function allTourPackages()
         ],
     ];
 
-    return view('components.tour-packages', compact('slides'));
+    return view('pages.tour-packages', compact('slides'));
 }
 
     
