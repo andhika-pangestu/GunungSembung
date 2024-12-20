@@ -26,59 +26,75 @@ class BookingResource extends Resource
     protected static ?string $navigationGroup = 'Transport';
 
     public static function form(Form $form): Form
-{
-    return $form
-        ->schema([
-            DatePicker::make('tgl_pemesanan')->required(),
-            MultiSelect::make('pilihan_bus')
-                ->required()
-                ->options(function () {
-                    return \App\Models\Bus::pluck('jenis', 'no_polisi')->toArray();
-                })
-                ->label('Pilih Bus')
-                ->reactive(),
-            TextInput::make('alamat_penjemputan')->required(),
-            TextInput::make('tujuan')->required(),
-            TextInput::make('nama_pemesan')->required(),
-            TextInput::make('jml_tagihan')->required()->numeric(),
-            Textarea::make('keterangan')->nullable(),
-            DatePicker::make('tgl_berangkat')->required(),
-            TimePicker::make('jam_berangkat')->required(),
-            DatePicker::make('tgl_kembali')->nullable(),
-        ]);
-}
+    {
+        return $form
+            ->schema([
+                DatePicker::make('tgl_pemesanan')->required(),
+                MultiSelect::make('pilihan_bus')
+                    ->required()
+                    ->options(function () {
+                        return \App\Models\Bus::pluck('jenis', 'no_polisi')->toArray();
+                    })
+                    ->label('Pilih Bus')
+                    ->reactive(),
+                TextInput::make('alamat_penjemputan')->required(),
+                TextInput::make('tujuan')->required(),
+                TextInput::make('nama_pemesan')->required(),
+                TextInput::make('jml_tagihan')->required()->numeric(),
+                Textarea::make('keterangan')->nullable(),
+                DatePicker::make('tgl_berangkat')->required(),
+                TimePicker::make('jam_berangkat')->required(),
+                DatePicker::make('tgl_kembali')->nullable(),
+            ]);
+    }
 
-
-
-public static function table(Table $table): Table
-{
-    return $table
-        ->columns([
-            TextColumn::make('tgl_pemesanan')->sortable(),
-            TextColumn::make('alamat_penjemputan')->searchable(),
-            TextColumn::make('tujuan')->searchable(),
-            TextColumn::make('nama_pemesan')->searchable(),
-            TextColumn::make('jml_tagihan')->sortable(),
-            TextColumn::make('id_booking')->sortable()->label('Booking ID'),
-            TextColumn::make('status')->sortable()->label('Status Pemesanan')->searchable(),
-            // Add ongkos_bus column to display the calculated fare
-            TextColumn::make('ongkos_bus')->sortable()->label('Ongkos Bus'),
-        ])
-        ->filters([])
-        ->actions([
-            Tables\Actions\EditAction::make(),
-            Tables\Actions\DeleteAction::make(),
-        ])
-        ->bulkActions([
-            Tables\Actions\DeleteBulkAction::make(),
-        ]);
-}
+    public static function table(Table $table): Table
+    {
+        return $table
+            ->columns([
+                TextColumn::make('tgl_pemesanan')->sortable(),
+                TextColumn::make('alamat_penjemputan')->searchable(),
+                TextColumn::make('tujuan')->searchable(),
+                TextColumn::make('nama_pemesan')->searchable(),
+                TextColumn::make('jml_tagihan')->sortable(),
+                TextColumn::make('id_booking')->sortable()->label('Booking ID'),
+                TextColumn::make('status')->sortable()->label('Status Pemesanan')->searchable(),
+                TextColumn::make('ongkos_bus')->sortable()->label('Ongkos Bus'),
+            ])
+            ->filters([
+                Tables\Filters\Filter::make('status')
+                    ->label('Status')
+                    ->query(fn (Builder $query): Builder => $query->where('status', 'pending'))
+                    ->toggle(),
+                Tables\Filters\Filter::make('nama_pemesan')
+                    ->label('Nama Pemesan')
+                    ->query(fn (Builder $query): Builder => $query->where('nama_pemesan', 'like', '%'.request('search').'%'))
+                    ->toggle(),
+                Tables\Filters\Filter::make('tgl_pemesanan')
+                    ->label('Tanggal Pemesanan')
+                    ->form([
+                        DatePicker::make('tgl_pemesanan_from')->label('Dari Tanggal'),
+                        DatePicker::make('tgl_pemesanan_to')->label('Sampai Tanggal'),
+                    ])
+                    ->query(function (Builder $query, array $data): Builder {
+                        return $query
+                            ->when($data['tgl_pemesanan_from'], fn ($query, $date) => $query->whereDate('tgl_pemesanan', '>=', $date))
+                            ->when($data['tgl_pemesanan_to'], fn ($query, $date) => $query->whereDate('tgl_pemesanan', '<=', $date));
+                    })
+                    ->toggle(),
+            ])
+            ->actions([
+                Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
+            ])
+            ->bulkActions([
+                Tables\Actions\DeleteBulkAction::make(),
+            ]);
+    }
 
     public static function getRelations(): array
     {
-        return [
-            //
-        ];
+        return [];
     }
 
     public static function getPages(): array

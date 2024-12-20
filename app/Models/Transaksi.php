@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -10,12 +9,48 @@ class Transaksi extends Model
     use HasFactory;
 
     protected $table = 'transaksi';
-    protected $fillable = ['id_booking', 'nama_pemesan', 'jml_bayar', 'keterangan', 'tujuan', 'lokasi_wisata', 'ongkos_bus', 'sisa', 'tgl_kuitansi', 'status'];
+    protected $primaryKey = 'id_kuitansi';
 
-    // Relasi ke Booking
+    protected $fillable = [
+        'id_booking',
+        'jml_bayar',
+        'sisa',
+        'status',
+        // tambahkan atribut lain yang diperlukan
+    ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::saving(function ($transaksi) {
+            $booking = $transaksi->booking;
+
+            if ($booking) {
+                $totalBayarSebelumnya = $booking->transaksi->where('id_kuitansi', '!=', $transaksi->id_kuitansi)->sum('jml_bayar');
+                $remainingPayment = $booking->jml_tagihan - $totalBayarSebelumnya;
+
+                // Pastikan jumlah bayar tidak melebihi sisa tagihan
+                if ($transaksi->jml_bayar > $remainingPayment) {
+                    $transaksi->jml_bayar = $remainingPayment;
+                }
+
+                $transaksi->sisa = max(0, $remainingPayment - $transaksi->jml_bayar);
+
+                if ($transaksi->sisa == 0) {
+                    $transaksi->status = 'lunas';
+                } else {
+                    $transaksi->status = 'dp';
+                }
+
+                // Panggil metode updateStatus dengan argumen yang benar
+                $booking->updateStatus($transaksi->status);
+            }
+        });
+    }
+
     public function booking()
     {
         return $this->belongsTo(Booking::class, 'id_booking');
     }
 }
-
