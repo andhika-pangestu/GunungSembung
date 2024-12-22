@@ -28,11 +28,6 @@ class Bus extends Model
         return $this->hasMany(Booking::class, 'pilihan_bus', 'no_polisi');
     }
 
-    // Relasi ke SuratTugasSupir
-    public function suratTugasSupirs()
-    {
-        return $this->hasMany(SuratTugasSupir::class, 'no_polisi', 'no_polisi');
-    }
 
     // Relasi ke Perbaikan
     public function perbaikans()

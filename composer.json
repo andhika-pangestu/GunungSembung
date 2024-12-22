@@ -6,12 +6,17 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "ariaieboy/filament-currency": "^1.10",
         "barryvdh/laravel-dompdf": "^3.0",
         "blade-ui-kit/blade-icons": "^1.7",
         "filament/filament": "^3.2",
         "laravel/framework": "^11.9",
         "laravel/tinker": "^2.9",
         "livewire/livewire": "^3.5",
+        "maatwebsite/excel": "^3.1",
+        "pelmered/filament-money-field": "^1.4",
+        "psr/simple-cache": "2.0",
+        "pxlrbt/filament-excel": "^2.3",
         "saade/filament-fullcalendar": "^3.2",
         "tomatophp/filament-invoices": "*"
     },

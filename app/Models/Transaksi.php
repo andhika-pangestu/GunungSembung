@@ -27,6 +27,7 @@ class Transaksi extends Model
             $booking = $transaksi->booking;
 
             if ($booking) {
+                // Hitung ulang semua transaksi terkait
                 $totalBayarSebelumnya = $booking->transaksi->where('id_kuitansi', '!=', $transaksi->id_kuitansi)->sum('jml_bayar');
                 $remainingPayment = $booking->jml_tagihan - $totalBayarSebelumnya;
 
@@ -42,9 +43,29 @@ class Transaksi extends Model
                 } else {
                     $transaksi->status = 'dp';
                 }
+            }
+        });
 
-                // Panggil metode updateStatus dengan argumen yang benar
-                $booking->updateStatus($transaksi->status);
+        static::saved(function ($transaksi) {
+            $booking = $transaksi->booking;
+
+            if ($booking) {
+                // Hitung ulang semua transaksi terkait setelah transaksi disimpan
+                $totalBayar = $booking->transaksi->sum('jml_bayar');
+                $remainingPayment = $booking->jml_tagihan - $totalBayar;
+
+                // Perbarui status booking berdasarkan total pembayaran
+                if ($remainingPayment == 0) {
+                    $booking->updateStatus('lunas');
+                } else {
+                    $booking->updateStatus('dp');
+                }
+
+                // Perbarui sisa untuk semua transaksi terkait
+                foreach ($booking->transaksi as $trans) {
+                    $trans->sisa = max(0, $remainingPayment - $trans->jml_bayar);
+                    $trans->saveQuietly();
+                }
             }
         });
     }

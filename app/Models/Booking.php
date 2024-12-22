@@ -28,6 +28,11 @@ class Booking extends Model
         return $this->hasMany(Transaksi::class, 'id_booking');
     }
 
+    public function suratTugasSupir()
+    {
+        return $this->hasMany(SuratTugasSupir::class, 'id_booking');
+    }
+
     public function getDisplayNameAttribute()
     {
         return "{$this->id_booking} - {$this->nama_pemesan}";

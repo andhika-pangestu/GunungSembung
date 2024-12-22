@@ -101,54 +101,42 @@
 
 <body>
     <div class="container">
-        <div class="header">
-            <img src="https://themelize.me/wp-content/uploads/2024/10/cropped-logo-inline.webp" alt="Logo PT Gunung Sembung">
-            <h1>Bukti Pembayaran</h1>
-            <div class="right">
-                <p><strong>PT Gunung Sembung</strong></p>
-                <p>Alamat PT Gunung Sembung</p>
-                <p>Email: info@gunungsembung.com</p>
-                <p>Telepon: +62 123 4567</p>
+        <div style="text-align: center; color: red; font-weight: bold;">
+            <div style="float: left; margin-right: 10px; width: 60px;">
+                <img src="{{ public_path('images/gsp.jpg') }}" alt="Logo" style="max-width: 100%;">
+            </div>
+            <div style="overflow: hidden;">
+                <h2 style="margin: 0; font-size: 1.5rem;">BUS PARIWISATA<br>GUNUNG SEMBUNG PUTRA</h2>
+                <p style="margin: 5px 0; font-size: 0.9rem;">Jl. Raya Cinunuk No. 126 A Telp. (022) 7830457, 7830463 Bandung</p>
             </div>
         </div>
-
         <div class="content">
             <div class="flex">
                 <div>
-                    <p><strong>Invoice #:</strong> {{ $record->id_kuitansi }}</p>
-                    <p><strong>Date:</strong> {{ \Carbon\Carbon::now()->format('Y-m-d') }}</p>
+                    <p><strong>No Kuitansi #:</strong> {{ $record->id_kuitansi }}</p>
+                    <p><strong>Date:</strong> {{ \Carbon\Carbon::now()->translatedFormat('d F Y') }}</p>
                 </div>
 
             </div>
-
             <div class="border"></div>
-            
-
-
             <div class="flex">
                 <div>
                     <p><strong>Nama Pemesan:</strong> {{ $record->booking->nama_pemesan }}</p>
-                    <p><strong>Alamat Penjemputan:</strong> {{ $record->booking->alamat_penjemputan }}</p>
                     <p><strong>Tujuan:</strong> {{ $record->booking->tujuan }}</p>
-                    <p><strong>Email:</strong> {{ $record->booking->email ?? 'pemesan@example.com' }}</p>
-                    <p><strong>Telepon:</strong> {{ $record->booking->telepon ?? '+62 987 6543' }}</p>
                 </div>
             </div>
-            
             <div class="border"></div>
             <div class="flex">
                 <div>
-                    <p><strong>Tanggal Berangkat:</strong> {{ $record->booking->tgl_berangkat }}</p>
-                    <p><strong>Jam Berangkat:</strong> {{ $record->booking->jam_berangkat }}</p>
+                    <p><strong>Alamat Penjemputan:</strong> {{ $record->booking->alamat_penjemputan }}</p>
                     <p><strong>Tujuan:</strong> {{ $record->booking->tujuan }}</p>
-                    <p><strong>Email:</strong> {{ $record->booking->email ?? 'pemesan@example.com' }}</p>
-                    <p><strong>Telepon:</strong> {{ $record->booking->telepon ?? '+62 987 6543' }}</p>
+                    <p><strong>Jam Berangkat:</strong> {{ $record->booking->jam_berangkat }}</p>
+                    <p><strong>Tanggal Berangkat:</strong> {{ \Carbon\Carbon::parse($record->booking->tgl_berangkat)->translatedFormat('d F Y') }}</p>
+                    <p><strong>Tanggal Kembali:</strong> {{ \Carbon\Carbon::parse($record->booking->tgl_kembali)->translatedFormat('d F Y') }}</p>
+
                 </div>
             </div>
-            
-
             <div class="border"></div>
-
             <div class="items">
                 <table>
                     <tbody>
@@ -164,14 +152,7 @@
                             <th>Ongkos Bus</th>
                             <td>{{ number_format($record->booking->ongkos_bus, 2) }}</td>
                         </tr>
-                        <tr>
-                            <th>Keterangan</th>
-                            <td>{{ $record->booking->keterangan }}</td>
-                        </tr>
-                        <tr>
-                            <th>Tanggal Kembali</th>
-                            <td>{{ $record->booking->tgl_kembali }}</td>
-                        </tr>
+
                         <tr>
                             <th>Status</th>
                             <td>{{ $record->booking->status }}</td>
@@ -180,19 +161,27 @@
                 </table>
             </div>
 
-            <div class="total">
-                <div>Total</div>
-                <div>{{ number_format($record->jml_bayar, 2) }}</div>
-            </div>
-
-            <div class="note">
-                <p>Harap melakukan pembayaran sebelum {{ \Carbon\Carbon::now()->addMonth()->format('Y-m-d') }} ke rekening <strong>BE71 0961 2345 6769</strong> dengan mencantumkan nomor invoice.</p>
+            <div class="flex" style="justify-content: flex-end; text-align: right;">
+                <div class="right">
+                    <div class="total">
+                        <div>Total</div>
+                        <div>{{ number_format($record->jml_bayar, 2) }}</div>
+                    </div>
+                    
+                    <div class="sisa-pembayaran">
+                        <div>Sisa</div>
+                        <div>{{ number_format($record->sisa, 2) }}</div>
+                    </div>
+                </div>
             </div>
         </div>
-
+    <div class="note">
+        <p><strong>Keterangan:</strong> {{ $record->booking->keterangan }}</p>
+    </div>
+    
         <div class="footer">
             <p>Terima kasih atas kepercayaan Anda kepada PT Gunung Sembung.</p>
-            <p>Email: info@gunungsembung.com | Website: www.gunungsembung.com</p>
+            <p>Website: www.gunungsembung.com</p>
         </div>
     </div>
 </body>

@@ -16,8 +16,11 @@ use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\TimePicker;
 use Illuminate\Database\Eloquent\Builder;
 use Filament\Forms\Components\MultiSelect;
+use Filament\Tables\Columns\BadgeColumn;
 use App\Filament\Resources\BookingResource\Pages;
-use App\Filament\Resources\BookingResource\RelationManagers;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
+
+
 
 class BookingResource extends Resource
 {
@@ -40,7 +43,12 @@ class BookingResource extends Resource
                 TextInput::make('alamat_penjemputan')->required(),
                 TextInput::make('tujuan')->required(),
                 TextInput::make('nama_pemesan')->required(),
-                TextInput::make('jml_tagihan')->required()->numeric(),
+                TextInput::make('jml_tagihan')
+                    ->required()
+                    ->label('Jumlah Tagihan')
+                    ->numeric()
+                    ->prefix('Rp')
+                    ->currencyMask(thousandSeparator: '.', decimalSeparator: ',', precision: 0),
                 Textarea::make('keterangan')->nullable(),
                 DatePicker::make('tgl_berangkat')->required(),
                 TimePicker::make('jam_berangkat')->required(),
@@ -55,11 +63,26 @@ class BookingResource extends Resource
                 TextColumn::make('tgl_pemesanan')->sortable(),
                 TextColumn::make('alamat_penjemputan')->searchable(),
                 TextColumn::make('tujuan')->searchable(),
+                TextColumn::make('pilihan_bus')->searchable(),
                 TextColumn::make('nama_pemesan')->searchable(),
-                TextColumn::make('jml_tagihan')->sortable(),
+                TextColumn::make('jml_tagihan')
+                    ->sortable()
+                    ->label('Jumlah Tagihan')
+                    ->currency('IDR'),
                 TextColumn::make('id_booking')->sortable()->label('Booking ID'),
-                TextColumn::make('status')->sortable()->label('Status Pemesanan')->searchable(),
-                TextColumn::make('ongkos_bus')->sortable()->label('Ongkos Bus'),
+                BadgeColumn::make('status')
+                ->label('Status Pemesanan')
+                ->sortable()
+                ->searchable()
+                ->colors([
+                    'danger' => 'pending',
+                    'warning' => 'dp',
+                    'success' => 'lunas',
+                ]),
+                TextColumn::make('ongkos_bus')
+                    ->sortable()
+                    ->label('Ongkos Bus')
+                    ->currency('IDR'),
             ])
             ->filters([
                 Tables\Filters\Filter::make('status')
@@ -87,8 +110,11 @@ class BookingResource extends Resource
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ])
+
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
+                ExportBulkAction::make()->label('Export to Excel'),
+                
             ]);
     }
 

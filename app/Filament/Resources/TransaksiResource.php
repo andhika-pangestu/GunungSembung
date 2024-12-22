@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Filament\Resources;
 
 use Filament\Forms;
@@ -20,10 +21,10 @@ use App\Filament\Resources\TransaksiResource\Pages;
 use App\Filament\Resources\TransaksiResource\Pages\EditTransaksi;
 use App\Filament\Resources\TransaksiResource\Pages\ListTransaksis;
 use App\Filament\Resources\TransaksiResource\Pages\CreateTransaksi;
-use Filament\Tables\Actions\ExportAction;
 use Filament\Notifications\Notification;
 use Barryvdh\DomPDF\Facade\Pdf;
-use App\Filament\Exports\TransaksiExporter;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
+
 
 use Illuminate\Support\Facades\Blade;
 
@@ -40,7 +41,7 @@ class TransaksiResource extends Resource
                 ->label('Booking')
                 ->relationship('booking', 'id_booking', function ($query) {
                     return $query->select('id_booking', 'nama_pemesan')
-                                 ->orderBy('id_booking');
+                        ->orderBy('id_booking');
                 })
                 ->searchable()
                 ->getSearchResultsUsing(function (string $search) {
@@ -70,15 +71,17 @@ class TransaksiResource extends Resource
                 ->minValue(0)
                 ->maxValue(function (callable $get) {
                     return $get('sisa');
-                }),
+                })
+                ->currencyMask(thousandSeparator: '.', decimalSeparator: ',', precision: 0),
 
             TextInput::make('sisa')
                 ->label('Sisa')
+                ->currencyMask(thousandSeparator: '.', decimalSeparator: ',', precision: 0)
                 ->disabled(),
 
             Textarea::make('keterangan_transaksi')
                 ->label('Keterangan'),
-            ]);
+        ]);
     }
 
     public static function table(Table $table): Table
@@ -116,18 +119,21 @@ class TransaksiResource extends Resource
             TextColumn::make('sisa')
                 ->label('Sisa')
                 ->sortable()
+                ->searchable()
                 ->formatStateUsing(fn($state) => 'Rp. ' . number_format($state, 0, ',', '.')),
 
             BadgeColumn::make('status')
                 ->label('Status')
+                ->sortable()
                 ->colors([
                     'danger' => 'pending',
                     'warning' => 'dp',
                     'success' => 'lunas',
-                ]),
-            ])
+                ])
+                ->searchable(),
+        ])
 
-->actions([
+            ->actions([
                 Tables\Actions\EditAction::make(),
                 Action::make('pdf')
                     ->label('Export to PDF')
@@ -140,6 +146,12 @@ class TransaksiResource extends Resource
                             )->stream();
                         }, $record->id_kuitansi . '.pdf');
                     }),
+            ])
+            
+            ->bulkActions([
+                Tables\Actions\DeleteBulkAction::make(),
+                ExportBulkAction::make()->label('Export to Excel'),
+                
             ]);
     }
 
@@ -160,5 +172,3 @@ class TransaksiResource extends Resource
         ];
     }
 }
-
-
