@@ -5,35 +5,40 @@ namespace App\Filament\Resources;
 use Filament\Forms;
 use Filament\Tables;
 use App\Models\Booking;
-use App\Models\Transaksi;
 use Filament\Forms\Form;
+use App\Models\Transaksi;
 use Filament\Tables\Table;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Filament\Resources\Resource;
+use Filament\Tables\Actions\Action;
 use Filament\Forms\Components\Select;
+use Illuminate\Support\Facades\Blade;
 use Filament\Forms\Components\Textarea;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\DateFilter;
 use Filament\Forms\Components\TextInput;
-use Illuminate\Database\Eloquent\Builder;
+use Filament\Notifications\Notification;
 use Filament\Tables\Columns\BadgeColumn;
-use Filament\Tables\Actions\Action;
+use Filament\Forms\Components\DatePicker;
+use Illuminate\Database\Eloquent\Builder;
+use Filament\Tables\Columns\Summarizers\Sum;
+use Filament\Tables\Actions\DeleteBulkAction;
+use Saade\FilamentFullCalendar\Actions\EditAction;
 use App\Filament\Resources\TransaksiResource\Pages;
+
+use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 use App\Filament\Resources\TransaksiResource\Pages\EditTransaksi;
 use App\Filament\Resources\TransaksiResource\Pages\ListTransaksis;
 use App\Filament\Resources\TransaksiResource\Pages\CreateTransaksi;
-use Filament\Notifications\Notification;
-use Barryvdh\DomPDF\Facade\Pdf;
-use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
-
-
-use Illuminate\Support\Facades\Blade;
+use Malzariey\FilamentDaterangepickerFilter\Filters\DateRangeFilter;
 
 class TransaksiResource extends Resource
 {
     protected static ?string $model = Transaksi::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-
+    protected static ?string $navigationIcon = 'heroicon-o-banknotes';
+    protected static ?string $navigationGroup = 'Pemesanan';
     public static function form(Form $form): Form
     {
         return $form->schema([
@@ -86,7 +91,10 @@ class TransaksiResource extends Resource
 
     public static function table(Table $table): Table
     {
-        return $table->columns([
+        return 
+        $table
+        ->defaultSort('id_booking', 'desc')
+        ->columns([
             TextColumn::make('id_booking')
                 ->label('Booking ID')
                 ->sortable(),
@@ -109,13 +117,15 @@ class TransaksiResource extends Resource
             TextColumn::make('booking.tgl_pemesanan')
                 ->label('Tanggal Pemesanan')
                 ->sortable()
-                ->searchable(),
+                ->searchable()
+                ->dateTime('d F Y'),
 
             TextColumn::make('jml_bayar')
                 ->label('Jumlah Bayar')
                 ->sortable()
                 ->formatStateUsing(fn($state) => 'Rp. ' . number_format($state, 0, ',', '.')),
-
+                TextColumn::make('jml_bayar')
+                ->summarize(Sum::make()),
             TextColumn::make('sisa')
                 ->label('Sisa')
                 ->sortable()
@@ -132,27 +142,38 @@ class TransaksiResource extends Resource
                 ])
                 ->searchable(),
         ])
-
-            ->actions([
-                Tables\Actions\EditAction::make(),
-                Action::make('pdf')
-                    ->label('Export to PDF')
-                    ->color('success')
-                    ->icon('heroicon-s-arrow-down-tray')
-                    ->action(function (Transaksi $record) {
-                        return response()->streamDownload(function () use ($record) {
-                            echo Pdf::loadHtml(
-                                Blade::render('pdf.transaksi', ['record' => $record])
-                            )->stream();
-                        }, $record->id_kuitansi . '.pdf');
-                    }),
-            ])
+        ->filters([
+            DateRangeFilter::make('booking.tgl_pemesanan')
+                ->label('Tanggal Pemesanan')
+                ->useRangeLabels()
+                ->modifyQueryUsing(function (Builder $query, $startDate, $endDate) {
+                    if ($startDate && $endDate) {
+                        $query->whereHas('booking', function (Builder $query) use ($startDate, $endDate) {
+                            $query->whereBetween('tgl_pemesanan', [$startDate, $endDate]);
+                        });
+                    }
+                })
+        ])
+        ->actions([
+            Tables\Actions\EditAction::make(),
+            Action::make('pdf')
+                ->label('Export to PDF')
+                ->color('success')
+                ->icon('heroicon-s-arrow-down-tray')
+                ->action(function (Transaksi $record) {
+                    return response()->streamDownload(function () use ($record) {
+                        echo Pdf::loadHtml(
+                            Blade::render('pdf.transaksi', ['record' => $record])
+                        )->stream();
+                    }, $record->id_kuitansi.'-'. $record->nama_pemesan .'.pdf');
+                }),
+        ])
+        
+        ->bulkActions([
+            Tables\Actions\DeleteBulkAction::make(),
+            ExportBulkAction::make()->label('Export to Excel'),
             
-            ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
-                ExportBulkAction::make()->label('Export to Excel'),
-                
-            ]);
+        ]);
     }
 
     public static function getRelations(): array

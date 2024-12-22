@@ -26,16 +26,18 @@ class SuratTugasSupirResource extends Resource
 {
     protected static ?string $model = SuratTugasSupir::class;
     protected static ?string $navigationIcon = 'heroicon-o-document-text';
+    protected static ?string $navigationGroup = 'Pemesanan';
 
     public static function form(Form $form): Form
     {
         return $form->schema([
             Select::make('id_booking')
-                ->label('Booking')
-                ->relationship('booking', 'id_booking', function ($query) {
-                    return $query->select('id_booking', 'nama_pemesan')
-                                 ->orderBy('id_booking');
-                })
+               ->label('Booking')
+               ->relationship('booking', 'id_booking', function ($query) {
+                   return $query->select('id_booking', 'nama_pemesan')
+                                ->orderBy('id_booking', 'asc') // Specify 'asc' or 'desc'
+                                ->orderBy('nama_pemesan', 'asc'); // Specify 'asc' or 'desc'
+               })
                 ->searchable()
                 ->required()
                 ->reactive()
@@ -78,7 +80,7 @@ class SuratTugasSupirResource extends Resource
                 ->prefix('Rp')
                 ->currencyMask(thousandSeparator: ',', decimalSeparator: '.', precision: 2),
             TextInput::make('nama_admin')->required(),
-            DatePicker::make('tgl_st')->required(),
+            DatePicker::make('tgl_st')->label('Tanggal Surat')->required(),
         ]);
     }
 
@@ -88,7 +90,9 @@ class SuratTugasSupirResource extends Resource
             TextColumn::make('id_booking')->label('Booking ID')->sortable(),
             TextColumn::make('nama_supir')->sortable()->searchable(),
             TextColumn::make('no_polisi')->sortable()->searchable(),
-            TextColumn::make('tgl_berangkat')->sortable(),
+            TextColumn::make('tgl_berangkat')
+                ->sortable()
+                ->dateTime('d m y'),
             TextColumn::make('jam_berangkat')->sortable(),
             TextColumn::make('nama_pemesan')->sortable()->searchable(),
             TextColumn::make('alamat_penjemputan')->sortable()->searchable(),
@@ -98,7 +102,9 @@ class SuratTugasSupirResource extends Resource
                 ->sortable()
                 ->currency('IDR'),
             TextColumn::make('nama_admin')->sortable()->searchable(),
-            TextColumn::make('tgl_st')->sortable(),
+            TextColumn::make('tgl_st')
+                ->sortable()
+                ->dateTime('d m y'),
         ])
         ->filters([
             SelectFilter::make('no_polisi')
@@ -136,7 +142,7 @@ class SuratTugasSupirResource extends Resource
                         echo Pdf::loadHtml(
                             Blade::render('pdf.surat_tugas_supir', ['record' => $record])
                         )->stream();
-                    }, $record->id_st . '.pdf');
+                    }, $record->id_kuitansi . ' - ' . $record->nama_supir  . ' - ' . $record->tgl_st . '.pdf');
                 }),
         ]);
     }

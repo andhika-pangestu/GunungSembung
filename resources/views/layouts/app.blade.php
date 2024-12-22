@@ -11,6 +11,9 @@
 </head>
 <body class="font-helvetica">
     <header>
+        <div class="fi-logo flex text-xl font-bold leading-5 tracking-tight text-gray-950 dark:text-white">
+            Laravel
+        </div>
         @include('partials.header') <!-- Menyertakan header dari partials -->
     </header>
 

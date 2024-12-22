@@ -22,8 +22,8 @@ use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 class PerbaikanResource extends Resource
 {
     protected static ?string $model = Perbaikan::class;
-
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationGroup = 'Transportasi';
+    protected static ?string $navigationIcon = 'heroicon-o-cog';
 
     public static function form(Form $form): Form
     {
@@ -52,8 +52,9 @@ class PerbaikanResource extends Resource
     }
 
     public static function table(Table $table): Table
-    {
+    {   
         return $table
+        ->defaultSort('id_booking', 'desc')
         ->columns([
             TextColumn::make('bus.no_polisi')
                 ->label('Nomor Polisi')
