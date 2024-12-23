@@ -39,6 +39,7 @@ class TransaksiResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-banknotes';
     protected static ?string $navigationGroup = 'Pemesanan';
+
     public static function form(Form $form): Form
     {
         return $form->schema([
@@ -54,7 +55,8 @@ class TransaksiResource extends Resource
                         ->orWhere('nama_pemesan', 'like', "%{$search}%")
                         ->get()
                         ->mapWithKeys(function ($booking) {
-                            return [$booking->id_booking => $booking->display_name];
+                            $displayName = "{$booking->id_booking} - {$booking->nama_pemesan}";
+                            return [$booking->id_booking => $displayName];
                         });
                 })
                 ->required()
