@@ -4,23 +4,25 @@ namespace App\Filament\Resources;
 
 use Filament\Forms;
 use Filament\Tables;
-use App\Models\SuratTugasSupir;
+use App\Models\Booking;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
+use App\Models\SuratTugasSupir;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Filament\Resources\Resource;
+use Filament\Tables\Actions\Action;
+use Filament\Tables\Filters\Filter;
 use Filament\Forms\Components\Select;
+use Illuminate\Support\Facades\Blade;
 use Filament\Forms\Components\Textarea;
+use Filament\Tables\Columns\Summarizers\Sum;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\TimePicker;
-use Filament\Tables\Actions\Action;
-use Barryvdh\DomPDF\Facade\Pdf;
-use Illuminate\Support\Facades\Blade;
-use App\Filament\Resources\SuratTugasSupirResource\Pages;
-use Filament\Tables\Filters\Filter;
 use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
+use App\Filament\Resources\SuratTugasSupirResource\Pages;
 
 class SuratTugasSupirResource extends Resource
 {
@@ -86,13 +88,20 @@ class SuratTugasSupirResource extends Resource
 
     public static function table(Table $table): Table
     {
-        return $table->columns([
+        return $table
+        ->defaultSort('id_booking', 'desc')
+        ->columns([
             TextColumn::make('id_booking')->label('Booking ID')->sortable(),
             TextColumn::make('nama_supir')->sortable()->searchable(),
             TextColumn::make('no_polisi')->sortable()->searchable(),
             TextColumn::make('tgl_berangkat')
+            ->label('Tanggal Berangkat')
                 ->sortable()
-                ->dateTime('d m y'),
+                ->dateTime('d F Y'),
+                TextColumn::make('tgl_kembali')
+                ->label('Tanggal Kembali')
+                ->sortable()
+                ->dateTime('d F Y'),
             TextColumn::make('jam_berangkat')->sortable(),
             TextColumn::make('nama_pemesan')->sortable()->searchable(),
             TextColumn::make('alamat_penjemputan')->sortable()->searchable(),
@@ -104,7 +113,12 @@ class SuratTugasSupirResource extends Resource
             TextColumn::make('nama_admin')->sortable()->searchable(),
             TextColumn::make('tgl_st')
                 ->sortable()
-                ->dateTime('d m y'),
+                ->label('Tanggal Surat')
+                ->dateTime('d F Y'),
+            TextColumn::make('kas_komisi')
+                ->summarize(Sum::make())
+                ->currency('IDR'),
+
         ])
         ->filters([
             SelectFilter::make('no_polisi')

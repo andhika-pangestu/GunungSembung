@@ -121,16 +121,15 @@ class TransaksiResource extends Resource
                 ->dateTime('d F Y'),
 
             TextColumn::make('jml_bayar')
-                ->label('Jumlah Bayar')
                 ->sortable()
-                ->formatStateUsing(fn($state) => 'Rp. ' . number_format($state, 0, ',', '.')),
-                TextColumn::make('jml_bayar')
+                ->currency('IDR'),
+            TextColumn::make('jml_bayar')
                 ->summarize(Sum::make()),
             TextColumn::make('sisa')
                 ->label('Sisa')
                 ->sortable()
                 ->searchable()
-                ->formatStateUsing(fn($state) => 'Rp. ' . number_format($state, 0, ',', '.')),
+                ->currency('IDR'),
 
             BadgeColumn::make('status')
                 ->label('Status')

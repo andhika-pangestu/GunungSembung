@@ -54,7 +54,7 @@ class PerbaikanResource extends Resource
     public static function table(Table $table): Table
     {   
         return $table
-        ->defaultSort('id_booking', 'desc')
+        ->defaultSort('bus.no_polisi', 'desc')
         ->columns([
             TextColumn::make('bus.no_polisi')
                 ->label('Nomor Polisi')
@@ -78,6 +78,7 @@ class PerbaikanResource extends Resource
                 ->locale('id_ID') // Set your locale here
                 ->sortable()
                 ->searchable(),
+                
         ])
         ->filters([
             Filter::make('tgl_perbaikan')
