@@ -64,23 +64,22 @@
 
                     <ul class="mt-8 space-y-4 text-sm">
                         <li>
-                            <a class="text-gray-700 transition hover:text-gray-700/75" href="/company">
+                            <a class="text-gray-700 transition hover:text-gray-700/75" href="{{ route('company') }}">
                                 Sejarah Perusahaan
                             </a>
                         </li>
                         <li>
-                            <a class="text-gray-700 transition hover:text-gray-700/75"
-                                href="{{ route('company') }}"></a>
-                            Keunggulan
+                            <a class="text-gray-700 transition hover:text-gray-700/75" href="{{ route('company') }}">
+                                Keunggulan
                             </a>
                         </li>
                         <li>
                             <a class="text-gray-700 transition hover:text-gray-700/75" href="{{ route('company') }}">
+                                Temui Tim Kami
                             </a>
-                            Temui Tim Kami
                         </li>
-
                     </ul>
+
 
                 </div>
 
