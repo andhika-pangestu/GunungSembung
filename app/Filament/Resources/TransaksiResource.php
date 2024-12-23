@@ -140,9 +140,9 @@ class TransaksiResource extends Resource
                 ->label('Status')
                 ->sortable()
                 ->colors([
-                    'danger' => 'Pending',
-                    'warning' => 'Dp',
-                    'success' => 'Lunas',
+                    'danger' => 'pending',
+                    'warning' => 'dp',
+                    'success' => 'lunas',
                 ])
                 ->searchable(),
         ])
@@ -169,7 +169,7 @@ class TransaksiResource extends Resource
                         echo Pdf::loadHtml(
                             Blade::render('pdf.transaksi', ['record' => $record])
                         )->stream();
-                    }, $record->id_kuitansi.'-'. $record->nama_pemesan .'.pdf');
+                    }, $record->id_kuitansi.'-'. $record->booking->nama_pemesan .'-'. $record->booking->tgl_pemesanan . '.pdf');
                 }),
         ])
         

@@ -72,7 +72,7 @@ class BookingResource extends Resource
             ->label('Id Booking')
             ->sortable(),
                TextColumn::make('nama_pemesan')->searchable()->label('Nama Pemesan'),
-               TextColumn::make('tgl_pemesanan')->sortable()->label('Tanggal Pemesanan') ->dateTime('d F Y'),
+               TextColumn::make('tgl_pemesanan')->sortable()->label('Tanggal Pemesanan'),
                TextColumn::make('pilihan_bus')->searchable()->label('Pilihan Bus'),
                TextColumn::make('alamat_penjemputan')->searchable()->label('Alamat Penjemputan'),
                TextColumn::make('tujuan')->searchable()->label('Tujuan'),
@@ -81,9 +81,9 @@ class BookingResource extends Resource
                    ->label('Jumlah Tagihan')
                    ->currency('IDR'),
                TextColumn::make('keterangan')->label('Keterangan'),
-               TextColumn::make('tgl_berangkat')->sortable()->label('Tanggal Berangkat')  ->dateTime('d F Y'),
+               TextColumn::make('tgl_berangkat')->sortable()->label('Tanggal Berangkat') ,
                TextColumn::make('jam_berangkat')->sortable()->label('Jam Berangkat'),
-               TextColumn::make('tgl_kembali')->sortable()->label('Tanggal Kembali')  ->dateTime('d F Y'),
+               TextColumn::make('tgl_kembali')->sortable()->label('Tanggal Kembali'),
                BadgeColumn::make('status')
                    ->label('Status Pemesanan')
                    ->sortable()
@@ -112,15 +112,15 @@ class BookingResource extends Resource
                    ->useRangeLabels()
                    ->modifyQueryUsing(function (Builder $query, $startDate, $endDate) {
                        if ($startDate && $endDate) {
-                           $query->whereBetween('tgl_pemesanan', [$startDate, $endDate]);
+                           $query->whereBetween('tgl_berangkat', [$startDate, $endDate]);
                        }
                    }),
-            DateRangeFilter::make('tgl_pemesanan')
-                   ->label('Tanggal Pemesanan')
+            DateRangeFilter::make('tgl_kembali')
+                   ->label('Tanggal kembali')
                    ->useRangeLabels()
                    ->modifyQueryUsing(function (Builder $query, $startDate, $endDate) {
                        if ($startDate && $endDate) {
-                           $query->whereBetween('tgl_pemesanan', [$startDate, $endDate]);
+                           $query->whereBetween('tgl_kembali', [$startDate, $endDate]);
                        }
                    })
                

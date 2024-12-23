@@ -14,6 +14,8 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\DatePicker;
 use Filament\Tables\Filters\Filter;
 use Illuminate\Database\Eloquent\Builder;
+use Filament\Tables\Columns\Summarizers\Sum;
+
 use App\Filament\Resources\PerbaikanResource\Pages;
 use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 
@@ -67,11 +69,15 @@ class PerbaikanResource extends Resource
                     ->searchable(),
                 TextColumn::make('tgl_perbaikan')
                     ->label('Tanggal Perbaikan')
-                    ->sortable()
-                    ->searchable(),
+                    ->sortable('desc')
+                    ->searchable()
+                    ->dateTime('d F Y'),
+                
                 \Filament\Tables\Columns\TextColumn::make('harga_perbaikan')
                     ->label('harga_perbaikan')
-                    ->currency('IDR'),
+                    ->currency('IDR')
+                    ->summarize(Sum::make() ->currency('IDR')),
+
             ])
             ->filters([
                 Filter::make('tgl_perbaikan')

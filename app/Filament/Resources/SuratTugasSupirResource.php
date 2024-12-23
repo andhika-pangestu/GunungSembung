@@ -123,8 +123,10 @@ class SuratTugasSupirResource extends Resource
                 ->label('Tanggal Surat')
                 ->dateTime('d F Y'),
             TextColumn::make('kas_komisi')
-                ->summarize(Sum::make())
-                ->currency('IDR'),
+                ->sortable()
+                ->label('Kas Komisi')
+                ->currency('IDR')
+                ->summarize(Sum::make()->currency('IDR')),
 
         ])
         ->filters([
