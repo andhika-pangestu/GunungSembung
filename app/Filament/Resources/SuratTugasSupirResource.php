@@ -23,7 +23,7 @@ use Filament\Forms\Components\TimePicker;
 use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\SuratTugasSupirResource\Pages;
-
+use Illuminate\Support\Str;
 class SuratTugasSupirResource extends Resource
 {
     protected static ?string $model = SuratTugasSupir::class;
@@ -34,12 +34,20 @@ class SuratTugasSupirResource extends Resource
     {
         return $form->schema([
             Select::make('id_booking')
-               ->label('Booking')
-               ->relationship('booking', 'id_booking', function ($query) {
-                   return $query->select('id_booking', 'nama_pemesan')
-                                ->orderBy('id_booking', 'asc') // Specify 'asc' or 'desc'
-                                ->orderBy('nama_pemesan', 'asc'); // Specify 'asc' or 'desc'
-               })
+                ->label('Booking')
+                ->relationship('booking', 'id_booking', function ($query) {
+                    return $query->select('id_booking', 'nama_pemesan')
+                        ->orderBy('id_booking');
+                })
+                ->searchable()
+                ->getSearchResultsUsing(function (string $search) {
+                    return Booking::where('id_booking', 'like', "%{$search}%")
+                        ->orWhere('nama_pemesan', 'like', "%{$search}%")
+                        ->get()
+                        ->mapWithKeys(function ($booking) {
+                            return [$booking->id_booking => $booking->display_name];
+                        });
+                })
                 ->searchable()
                 ->required()
                 ->reactive()
@@ -66,6 +74,7 @@ class SuratTugasSupirResource extends Resource
                         $set('nama_supir', $bus->nama_supir);
                     }
                 })
+                ->reactive()
                 ->required(),
     
             TextInput::make('nama_supir')->required(),
@@ -75,7 +84,7 @@ class SuratTugasSupirResource extends Resource
             TextInput::make('nama_pemesan')->required(),
             TextInput::make('alamat_penjemputan')->required(),
             TextInput::make('tujuan')->required(),
-            Forms\Components\TextInput::make('kas_komisi')
+            TextInput::make('kas_komisi')
                 ->label('Kas Komisi')
                 ->required()
                 ->numeric()
@@ -104,12 +113,10 @@ class SuratTugasSupirResource extends Resource
                 ->dateTime('d F Y'),
             TextColumn::make('jam_berangkat')->sortable(),
             TextColumn::make('nama_pemesan')->sortable()->searchable(),
-            TextColumn::make('alamat_penjemputan')->sortable()->searchable(),
-            TextColumn::make('tujuan')->sortable()->searchable(),
-            TextColumn::make('kas_komisi')
-                ->label('Kas Komisi')
-                ->sortable()
-                ->currency('IDR'),
+            TextColumn::make('alamat_penjemputan')->sortable()->searchable()
+,
+            TextColumn::make('tujuan')->sortable()->searchable()
+            ->formatStateUsing(fn (string $state) => Str::limit($state, 50)),
             TextColumn::make('nama_admin')->sortable()->searchable(),
             TextColumn::make('tgl_st')
                 ->sortable()
@@ -156,7 +163,7 @@ class SuratTugasSupirResource extends Resource
                         echo Pdf::loadHtml(
                             Blade::render('pdf.surat_tugas_supir', ['record' => $record])
                         )->stream();
-                    }, $record->id_kuitansi . ' - ' . $record->nama_supir  . ' - ' . $record->tgl_st . '.pdf');
+                    }, $record->booking->id_booking . ' - ' . $record->nama_supir  . ' - ' . $record->tgl_st .' - '.$record->no_polisi . '.pdf');
                 }),
         ]);
     }

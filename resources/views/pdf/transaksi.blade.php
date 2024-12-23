@@ -155,7 +155,7 @@
 
                         <tr>
                             <th>Status</th>
-                            <td>{{ $record->booking->status }}</td>
+                            <td>{{ $record->status }}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -176,7 +176,7 @@
             </div>
         </div>
     <div class="note">
-        <p><strong>Keterangan:</strong> {{ $record->booking->keterangan }}</p>
+        <p><strong>Keterangan:</strong> {{ $record->keterangan }}</p>
     </div>
     
         <div class="footer">

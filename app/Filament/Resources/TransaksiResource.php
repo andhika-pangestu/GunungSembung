@@ -73,6 +73,7 @@ class TransaksiResource extends Resource
                 ->required()
                 ->label('Jumlah Bayar')
                 ->numeric()
+                ->prefix('Rp')
                 ->minValue(0)
                 ->maxValue(function (callable $get) {
                     return $get('sisa');
@@ -82,7 +83,8 @@ class TransaksiResource extends Resource
             TextInput::make('sisa')
                 ->label('Sisa')
                 ->currencyMask(thousandSeparator: '.', decimalSeparator: ',', precision: 0)
-                ->disabled(),
+                ->disabled()
+                ->prefix('Rp'),
 
             Textarea::make('keterangan_transaksi')
                 ->label('Keterangan'),
@@ -120,11 +122,14 @@ class TransaksiResource extends Resource
                 ->searchable()
                 ->dateTime('d F Y'),
 
+               
             TextColumn::make('jml_bayar')
-                ->sortable()
-                ->currency('IDR'),
-            TextColumn::make('jml_bayar')
-                ->summarize(Sum::make()),
+            ->label('Jumlah Bayar')
+            ->sortable()
+            ->currency('IDR')
+            ->summarize(Sum::make() ->currency('IDR')),
+
+
             TextColumn::make('sisa')
                 ->label('Sisa')
                 ->sortable()
@@ -135,9 +140,9 @@ class TransaksiResource extends Resource
                 ->label('Status')
                 ->sortable()
                 ->colors([
-                    'danger' => 'pending',
-                    'warning' => 'dp',
-                    'success' => 'lunas',
+                    'danger' => 'Pending',
+                    'warning' => 'Dp',
+                    'success' => 'Lunas',
                 ])
                 ->searchable(),
         ])
