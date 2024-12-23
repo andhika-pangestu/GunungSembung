@@ -19,9 +19,9 @@ class DashboardProvider extends ServiceProvider
     public function boot(): void
     {
         // Register the widgets
-        Widget::register([
-            CalendarWidget::class,
-        ]);
+        // Widget::register([
+        //     CalendarWidget::class,
+        // ]);
     }
 
 }
