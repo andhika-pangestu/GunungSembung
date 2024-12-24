@@ -56,10 +56,11 @@ class Transaksi extends Model
 
                 // Perbarui status booking berdasarkan total pembayaran
                 if ($remainingPayment == 0) {
-                    $booking->updateStatus('lunas');
+                    $booking->status = 'lunas';
                 } else {
-                    $booking->updateStatus('dp');
+                    $booking->status = 'dp';
                 }
+                $booking->save();
 
                 // Perbarui sisa untuk semua transaksi terkait
                 foreach ($booking->transaksi as $trans) {

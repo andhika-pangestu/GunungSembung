@@ -33,15 +33,16 @@ class Booking extends Model
         return $this->hasMany(SuratTugasSupir::class, 'id_booking');
     }
 
-    public function getDisplayNameAttribute()
+    public function jadwals()
     {
-        return "{$this->id_booking} - {$this->nama_pemesan}";
+        return $this->hasMany(Jadwal::class, 'id_booking', 'id_booking');
     }
 
-    // Tambahkan metode updateStatus
-    public function updateStatus($status)
+    public function updateStatus()
     {
-        $this->status = $status;
+        $totalBayarSebelumnya = $this->transaksi->sum('jml_bayar');
+        $sisa = $this->jml_tagihan - $totalBayarSebelumnya;
+        $this->status = $sisa == 0 ? 'lunas' : 'dp';
         $this->save();
     }
 }
