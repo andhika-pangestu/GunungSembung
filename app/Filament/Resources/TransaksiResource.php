@@ -39,6 +39,7 @@ class TransaksiResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-banknotes';
     protected static ?string $navigationGroup = 'Pemesanan';
+
     public static function form(Form $form): Form
     {
         return $form->schema([
@@ -54,7 +55,8 @@ class TransaksiResource extends Resource
                         ->orWhere('nama_pemesan', 'like', "%{$search}%")
                         ->get()
                         ->mapWithKeys(function ($booking) {
-                            return [$booking->id_booking => $booking->display_name];
+                            $displayName = "{$booking->id_booking} - {$booking->nama_pemesan}";
+                            return [$booking->id_booking => $displayName];
                         });
                 })
                 ->required()
@@ -73,6 +75,7 @@ class TransaksiResource extends Resource
                 ->required()
                 ->label('Jumlah Bayar')
                 ->numeric()
+                ->prefix('Rp')
                 ->minValue(0)
                 ->maxValue(function (callable $get) {
                     return $get('sisa');
@@ -82,7 +85,8 @@ class TransaksiResource extends Resource
             TextInput::make('sisa')
                 ->label('Sisa')
                 ->currencyMask(thousandSeparator: '.', decimalSeparator: ',', precision: 0)
-                ->disabled(),
+                ->disabled()
+                ->prefix('Rp'),
 
             Textarea::make('keterangan_transaksi')
                 ->label('Keterangan'),
@@ -120,17 +124,19 @@ class TransaksiResource extends Resource
                 ->searchable()
                 ->dateTime('d F Y'),
 
+               
             TextColumn::make('jml_bayar')
-                ->label('Jumlah Bayar')
-                ->sortable()
-                ->formatStateUsing(fn($state) => 'Rp. ' . number_format($state, 0, ',', '.')),
-                TextColumn::make('jml_bayar')
-                ->summarize(Sum::make()),
+            ->label('Jumlah Bayar')
+            ->sortable()
+            ->currency('IDR')
+            ->summarize(Sum::make() ->currency('IDR')),
+
+
             TextColumn::make('sisa')
                 ->label('Sisa')
                 ->sortable()
                 ->searchable()
-                ->formatStateUsing(fn($state) => 'Rp. ' . number_format($state, 0, ',', '.')),
+                ->currency('IDR'),
 
             BadgeColumn::make('status')
                 ->label('Status')
@@ -165,7 +171,7 @@ class TransaksiResource extends Resource
                         echo Pdf::loadHtml(
                             Blade::render('pdf.transaksi', ['record' => $record])
                         )->stream();
-                    }, $record->id_kuitansi.'-'. $record->nama_pemesan .'.pdf');
+                    }, $record->id_kuitansi.'-'. $record->booking->nama_pemesan .'-'. $record->booking->tgl_pemesanan . '.pdf');
                 }),
         ])
         
