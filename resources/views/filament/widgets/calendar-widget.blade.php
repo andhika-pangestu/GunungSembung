@@ -1,3 +1,4 @@
+<!-- filepath: /c:/laragon/www/GunungSembung/resources/views/filament/widgets/calendar-widget.blade.php -->
 <x-filament-widgets::widget>
     <x-filament::section>
         <div>
@@ -7,7 +8,7 @@
         </div>
 
         <!-- Modal for Displaying Booking Details -->
-        @if($record)
+        @if(isset($record) && $record)
             <div
                 x-data="{ open: {{ $record ? 'true' : 'false' }} }"
                 x-show="open"
@@ -55,7 +56,7 @@
                         info.jsEvent.preventDefault();
 
                         // Emit Livewire event to set the record
-                        @this.set('record', @json(\App\Models\Booking::find(info.event.id)));
+                        @this.set('record', info.event.id);
                     },
                 });
                 calendar.render();

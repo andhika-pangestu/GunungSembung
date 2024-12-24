@@ -21,9 +21,9 @@ class CalendarWidget extends FullCalendarWidget
     public Model|string|int|null $record = Booking::class;
 
     public function mount(): void
-{
-    $this->record = Booking::first(); // Assign the first Booking record or null
-}
+    {
+        $this->record = Booking::first(); // Assign the first Booking record or null
+    }
 
     /**
      * Fetch events for FullCalendar.
@@ -32,70 +32,70 @@ class CalendarWidget extends FullCalendarWidget
      * @return array
      */
 
-     public function fetchEvents(array $fetchInfo): array
-     {
-         // Log the incoming fetchInfo
-         Log::info('fetchEvents called with fetchInfo:', $fetchInfo);
-     
-         // Validate required keys ('start' and 'end')
-         if (!isset($fetchInfo['start']) || !isset($fetchInfo['end'])) {
-             Log::warning('Missing start or end in fetchInfo');
-     
-             // Optionally, set default dates for testing
-             $fetchInfo = [
-                 'start' => '2023-01-01',
-                 'end' => '2023-12-31',
-             ];
-         }
-     
-         // Map 'start' and 'end' to 'tgl_berangkat' and 'tgl_kembali'
-         $tgl_berangkat = $fetchInfo['start'];
-         $tgl_kembali = $fetchInfo['end'];
-     
-         // Fetch booking data using Eloquent ORM
-         try {
-             $bookings = Booking::select('id_booking', 'pilihan_bus', 'tgl_berangkat', 'tgl_kembali', 'nama_pemesan')
-                 ->where('tgl_berangkat', '>=', $tgl_berangkat)
-                 ->where('tgl_kembali', '<=', $tgl_kembali)
-                 ->get();
-     
-             // Log the retrieved bookings
-             Log::info('Bookings fetched:', $bookings->toArray());
-         } catch (\Exception $e) {
-             Log::error('Error fetching bookings: ' . $e->getMessage());
-             return [];
-         }
-     
-         // Format the booking data as events for FullCalendar
-         try {
-             $events = $bookings->map(function (Booking $booking) {
-                 // Ensure 'pilihan_bus' is a comma-separated string
-                 $busNumbers = explode(',', trim($booking->pilihan_bus, '[]'));
-     
-                 return array_map(function ($busNumber) use ($booking) {
-                     return [
-                         'id' => $booking->id_booking, 
-                         'title' => trim($busNumber) . ' - ' . $booking->nama_pemesan,
-                         'start' => $booking->tgl_berangkat,
-                         'end' => $booking->tgl_kembali,
-                         'url' => BookingResource::getUrl('view', ['record' => $booking]),
-                         'extendedProps' => [
-                             'pilihan_bus' => trim($busNumber),
-                             'nama_pemesan' => $booking->nama_pemesan,
-                         ],
-                     ];
-                 }, $busNumbers);
-             })->flatten(1)->toArray();
-     
-             // Log the formatted events
-             Log::info('Formatted events:', $events);
-     
-             return $events;
-         } catch (\Exception $e) {
-             Log::error('Error formatting events: ' . $e->getMessage());
-             return [];
-         }
-     }
+    public function fetchEvents(array $fetchInfo): array
+    {
+        // Log the incoming fetchInfo
+        Log::info('fetchEvents called with fetchInfo:', $fetchInfo);
+
+        // Validate required keys ('start' and 'end')
+        if (!isset($fetchInfo['start']) || !isset($fetchInfo['end'])) {
+            Log::warning('Missing start or end in fetchInfo');
+
+            // Optionally, set default dates for testing
+            $fetchInfo = [
+                'start' => '2023-01-01',
+                'end' => '2023-12-31',
+            ];
+        }
+
+        // Map 'start' and 'end' to 'tgl_berangkat' and 'tgl_kembali'
+        $tgl_berangkat = $fetchInfo['start'];
+        $tgl_kembali = $fetchInfo['end'];
+
+        // Fetch booking data using Eloquent ORM
+        try {
+            $bookings = Booking::select('id_booking', 'pilihan_bus', 'tgl_berangkat', 'tgl_kembali', 'nama_pemesan')
+                ->where('tgl_berangkat', '>=', $tgl_berangkat)
+                ->where('tgl_kembali', '<=', $tgl_kembali)
+                ->get();
+
+            // Log the retrieved bookings
+            Log::info('Bookings fetched:', $bookings->toArray());
+        } catch (\Exception $e) {
+            Log::error('Error fetching bookings: ' . $e->getMessage());
+            return [];
+        }
+
+        // Format the booking data as events for FullCalendar
+        try {
+            $events = $bookings->map(function (Booking $booking) {
+                // Ensure 'pilihan_bus' is a comma-separated string
+                $busNumbers = is_array($booking->pilihan_bus) ? $booking->pilihan_bus : explode(',', trim($booking->pilihan_bus, '[]'));
+
+                return array_map(function ($busNumber) use ($booking) {
+                    return [
+                        'id' => $booking->id_booking,
+                        'title' => trim($busNumber) . ' - ' . $booking->nama_pemesan,
+                        'start' => $booking->tgl_berangkat,
+                        'end' => $booking->tgl_kembali,
+                        'url' => BookingResource::getUrl('view', ['record' => $booking]),
+                        'extendedProps' => [
+                            'pilihan_bus' => trim($busNumber),
+                            'nama_pemesan' => $booking->nama_pemesan,
+                        ],
+                    ];
+                }, $busNumbers);
+            })->flatten(1)->toArray();
+
+            // Log the formatted events
+            Log::info('Formatted events:', $events);
+
+            return $events;
+        } catch (\Exception $e) {
+            Log::error('Error formatting events: ' . $e->getMessage());
+            return [];
+        }
+    }
 
     protected function getViewData(): array
     {
