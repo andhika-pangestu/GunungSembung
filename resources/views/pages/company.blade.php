@@ -135,31 +135,31 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
                 <!-- Member 1 -->
                 <div class="bg-white shadow-lg rounded-lg p-6 text-center">
-                    <img class="rounded-full mx-auto w-24 h-24 mb-4" src="images/ngabrul.jpg" alt="Emily Chen">
+                    <img class="rounded-full mx-auto w-24 h-24 mb-4" src="images/pakagus.jpg">
                     <h3 class="font-bold text-lg text-gray-700">Pak Haji Agus</h3>
                     <p class="text-sm text-gray-500">Komisaris</p>
                 </div>
                 <!-- Member 5 -->
                 <div class="bg-white shadow-lg rounded-lg p-6 text-center">
-                    <img class="rounded-full mx-auto w-24 h-24 mb-4" src="images/pakhaji.jpg" alt="John Doe">
+                    <img class="rounded-full mx-auto w-24 h-24 mb-4" src="images/pakhaji.jpg">
                     <h3 class="font-bold text-lg text-gray-700">Pak Haji Cepi</h3>
                     <p class="text-sm text-gray-500">Direktur Utama</p>
                 </div>
                 <!-- Member 2 -->
                 <div class="bg-white shadow-lg rounded-lg p-6 text-center">
-                    <img class="rounded-full mx-auto w-24 h-24 mb-4" src="images/euis.jpg" alt="Jane Smith">
+                    <img class="rounded-full mx-auto w-24 h-24 mb-4" src="images/euis.jpg" >
                     <h3 class="font-bold text-lg text-gray-700">Bu Euis</h3>
                     <p class="text-sm text-gray-500">Administrasi </p>
                 </div>
                 <!-- Member 3 -->
                 <div class="bg-white shadow-lg rounded-lg p-6 text-center">
-                    <img class="rounded-full mx-auto w-24 h-24 mb-4" src="images/esih.jpg" alt="Ahmad Rafi">
+                    <img class="rounded-full mx-auto w-24 h-24 mb-4" src="images/esih.jpg" >
                     <h3 class="font-bold text-lg text-gray-700">Bu Esih</h3>
                     <p class="text-sm text-gray-500">Administrasi</p>
                 </div>
                 <!-- Member 4 -->
                 <div class="bg-white shadow-lg rounded-lg p-6 text-center">
-                    <img class="rounded-full mx-auto w-24 h-24 mb-4" src="images/pakdede.jpg" alt="Emily Chen">
+                    <img class="rounded-full mx-auto w-24 h-24 mb-4" src="images/pakdede.jpg">
                     <h3 class="font-bold text-lg text-gray-700">Pak Dede</h3>
                     <p class="text-sm text-gray-500">Karyawan</p>
                 </div>

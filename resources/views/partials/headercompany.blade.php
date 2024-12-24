@@ -1,7 +1,15 @@
 <section class="w-full px-8 text-gray-700 bg-white fixed z-50">
     <div class="container flex items-center justify-between py-5 mx-auto md:flex-row max-w-7xl">
         <!-- Logo -->
-        <a href="#_" class="text-xl font-black leading-none text-red-600">GUNUNG SEMBUNG PUTRA</a>
+        <div class="flex items-center space-x-4">
+            <!-- Logo -->
+            <a href="{{ url('/') }}">
+                <img src="{{ asset('images/gsp.jpg') }}" alt="GSP Logo" class="h-12 w-auto">
+            </a>
+            <!-- Title -->
+            <a href="#_" class="text-xl font-black leading-none text-red-600">GUNUNG SEMBUNG PUTRA</a>
+        </div>
+
 
         <!-- Hamburger Button (Mobile) -->
         <button id="menu-toggle" class="block md:hidden ml-auto focus:outline-none">
