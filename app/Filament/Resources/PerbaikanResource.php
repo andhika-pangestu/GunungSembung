@@ -54,7 +54,6 @@ class PerbaikanResource extends Resource
     public static function table(Table $table): Table
     {   
         return $table
-        ->defaultSort('id_booking', 'desc')
         ->columns([
             TextColumn::make('bus.no_polisi')
                 ->label('Nomor Polisi')
