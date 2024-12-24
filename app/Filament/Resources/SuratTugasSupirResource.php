@@ -45,10 +45,10 @@ class SuratTugasSupirResource extends Resource
                         ->orWhere('nama_pemesan', 'like', "%{$search}%")
                         ->get()
                         ->mapWithKeys(function ($booking) {
-                            return [$booking->id_booking => $booking->display_name];
+                            $displayName = "{$booking->id_booking} - {$booking->nama_pemesan}";
+                            return [$booking->id_booking => $displayName];
                         });
                 })
-                ->searchable()
                 ->required()
                 ->reactive()
                 ->afterStateUpdated(function (callable $set, $state) {
