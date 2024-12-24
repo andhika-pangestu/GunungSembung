@@ -56,7 +56,9 @@
         @foreach ($slides as $index => $slide)
             <button type="button" data-slide-to="{{ $index }}" class="carousel-indicator w-3 h-3 rounded-full bg-gray-300 hover:bg-gray-400 transition"></button>
         @endforeach
+        &nbsp;
     </div>
+
 
     <!-- JavaScript for Carousel -->
     <script>
