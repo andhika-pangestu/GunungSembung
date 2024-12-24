@@ -6,7 +6,7 @@ use Filament\Forms;
 use Filament\Tables;
 use App\Models\Booking;
 use Filament\Resources\Form;
-use Filament\Resources\Table;
+use Filament\Tables\Table;
 use Filament\Resources\Resource;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
@@ -102,18 +102,15 @@ class BookingResource extends Resource
 
 
     public static function table(Table $table): Table
-    {      return $table
-           ->defaultSort('id_booking', 'desc')
-           ->columns([
-            ]);
-    }
-
+    {
+        return $table
+            ->defaultSort('id_booking', 'desc')
+            ->columns([
                 TextColumn::make('id_booking')
                     ->searchable()
                     ->label('Id Booking')
-                    ->sortable(),
-
-                    // ->toggleable(isToggledHiddenByDefault: true),
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 
                TextColumn::make('nama_pemesan')
                     ->searchable()
@@ -147,13 +144,15 @@ class BookingResource extends Resource
                
                TextColumn::make('alamat_penjemputan')
                     ->searchable()
-                    ->label('Alamat Penjemputan'),
+                    ->label('Alamat Penjemputan')
+                    ->limit(50)
+                    ->wrap(),
                
                 TextColumn::make('tgl_kembali')
                     ->sortable()
                     ->label('Tanggal Kembali')
-                    ->dateTime('d F Y'),
-                    // ->toggleable(isToggledHiddenByDefault: true),
+                    ->dateTime('d F Y')
+                    ->toggleable(isToggledHiddenByDefault: true),
 
                TextColumn::make('jml_tagihan')
                    ->sortable()
@@ -164,8 +163,8 @@ class BookingResource extends Resource
                TextColumn::make('keterangan')
                     ->label('Keterangan')
                     ->limit(100)
-                    ->wrap(),
-                    // ->toggleable(isToggledHiddenByDefault: true),                  
+                    ->wrap()
+                    ->toggleable(isToggledHiddenByDefault: true),                  
                
                BadgeColumn::make('status')
                    ->label('Status Pemesanan')
@@ -181,8 +180,8 @@ class BookingResource extends Resource
                    ->sortable()
                    ->label('Ongkos Bus')
                    ->currency('IDR')
-                   ->formatStateUsing(fn($state) => 'Rp. ' . number_format($state, 0, ',', '.')),
-                //    ->toggleable(isToggledHiddenByDefault: true),
+                   ->formatStateUsing(fn($state) => 'Rp. ' . number_format($state, 0, ',', '.'))
+                ->toggleable(isToggledHiddenByDefault: true),
            ])
            ->filters([
                Tables\Filters\Filter::make('status')
