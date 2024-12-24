@@ -9,6 +9,7 @@ class BookingChart extends ChartWidget
 {
     protected static ?string $heading = 'Data Pemesanan';
     protected static ?string $description = 'Data 12 bulan terakhir';
+    protected static ?int $sort = 2;
     protected function getData(): array
     {
         // Fetch data from the database
@@ -38,7 +39,7 @@ class BookingChart extends ChartWidget
                     'type' => 'line',
                     'label' => 'Bookings Line',
                     'data' => $data,
-                    'borderColor' => 'rgba(27, 243, 206, 0.8)',
+                    'borderColor' => 'rgba(27, 222, 206, 0.8)',
                     'borderWidth' => 2,
                     'fill' => false,
                 ],

@@ -10,6 +10,7 @@ use Illuminate\Support\Carbon;
 
 class StatPendapatan extends BaseWidget
 {
+    protected static ?int $sort = 0;
     protected function getStats(): array
     {
        // Get the current month and year
@@ -57,18 +58,18 @@ class StatPendapatan extends BaseWidget
             Stat::make('Total Pemasukan', $formattedPendapatan)
             ->description('Total pemasukan bulan ini')
             ->descriptionIcon('heroicon-m-banknotes',IconPosition::Before)
-            ->chart([1,5,9,1])
+            ->chart([1,3,5,10,20,40])
             ->color('success'),
             Stat::make('Bus Dipesan', $formattedBusesOrdered)
             ->description('Total bus yang dipesan bulan ini')
             ->descriptionIcon('heroicon-m-truck', IconPosition::Before)
-            ->chart([1, 5, 9, 1])
-            ->color('success'),
-            Stat::make('Tipe Bus Terbanyak Dipesan', $mostOrderedBusType)
+            ->chart([1,3,5,10,20,40])
+            ->color('warning'),
+            Stat::make('Bus Dipesan Terbanyak', $mostOrderedBusType)
                 ->description('Tipe bus yang paling banyak dipesan bulan ini')
                 ->descriptionIcon('heroicon-m-fire', IconPosition::Before)
-                ->chart([1, 5, 9, 1])
-                ->color('success'),
+                ->chart([1,3,5,10,20,40])
+                ->color('danger'),
         ];
     }
 }

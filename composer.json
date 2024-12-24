@@ -18,7 +18,7 @@
         "pelmered/filament-money-field": "^1.4",
         "psr/simple-cache": "2.0",
         "pxlrbt/filament-excel": "^2.3",
-        "saade/filament-fullcalendar": "^3.2",
+        "saade/filament-fullcalendar": "*",
         "tomatophp/filament-invoices": "*"
     },
     "require-dev": {
