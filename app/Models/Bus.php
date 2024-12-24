@@ -10,7 +10,18 @@ class Bus extends Model
     use HasFactory;
 
     protected $table = 'bus';
-    protected $fillable = ['no_polisi', 'jenis', 'kapasitas'];
+    protected $primaryKey = 'no_polisi'; // Ganti dengan primary key yang benar
+    public $incrementing = false; // Jika primary key bukan auto-increment
+    protected $keyType = 'string'; // Jika primary key adalah string
+
+    protected $fillable = [
+        'no_polisi',
+        'jenis',
+        'kapasitas',
+        'ketersediaan',
+        'nama_supir',
+        // tambahkan atribut lain yang diperlukan
+    ];
 
     public function jadwal()
     {

@@ -24,6 +24,10 @@ use Illuminate\Support\Facades\Blade;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Malzariey\FilamentDaterangepickerFilter\Filters\DateRangeFilter;
 use App\Models\Transaksi;
+use Filament\Tables\Columns\IconColumn;
+use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Actions\DeleteAction;
+use Filament\Tables\Actions\DeleteBulkAction;
 
 class BookingResource extends Resource
 {
@@ -57,10 +61,10 @@ class BookingResource extends Resource
                                                 ->where('tgl_kembali', '>=', $tgl_kembali);
                                       });
                             });
-                        })->pluck('jenis', 'no_polisi')->toArray();
-                    })
-                    ->label('Pilih Bus')
-                    ->reactive(),
+                        })->get()->mapWithKeys(function ($bus) {
+                            return [$bus->no_polisi => "{$bus->jenis} - {$bus->no_polisi}"];
+                        });
+                    }),
                 TextInput::make('alamat_penjemputan')->required(),
                 TextInput::make('tujuan')->required(),
                 TextInput::make('nama_pemesan')->required(),
@@ -138,11 +142,11 @@ class BookingResource extends Resource
                     })
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                EditAction::make(),
+                DeleteAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
+                DeleteBulkAction::make(),
                 ExportBulkAction::make()->label('Export to Excel'),
             ]);
     }
