@@ -5,6 +5,8 @@ namespace App\Filament\Widgets;
 use App\Models\Booking; 
 use Saade\FilamentFullCalendar\Widgets\FullCalendarWidget;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use App\Filament\Resources\BookingResource;
 use Illuminate\Database\Eloquent\Model;
 
 class CalendarWidget extends FullCalendarWidget
@@ -32,37 +34,68 @@ class CalendarWidget extends FullCalendarWidget
 
      public function fetchEvents(array $fetchInfo): array
      {
-         // Fetch booking data from the database
-         $bookings = DB::table('booking') // Ensure the table name is correct (typically plural: 'bookings')
-             ->select('id_booking', 'pilihan_bus', 'tgl_berangkat', 'tgl_kembali', 'nama_pemesan')
-             ->get();
+         // Log the incoming fetchInfo
+         Log::info('fetchEvents called with fetchInfo:', $fetchInfo);
+     
+         // Validate required keys ('start' and 'end')
+         if (!isset($fetchInfo['start']) || !isset($fetchInfo['end'])) {
+             Log::warning('Missing start or end in fetchInfo');
+     
+             // Optionally, set default dates for testing
+             $fetchInfo = [
+                 'start' => '2023-01-01',
+                 'end' => '2023-12-31',
+             ];
+         }
+     
+         // Map 'start' and 'end' to 'tgl_berangkat' and 'tgl_kembali'
+         $tgl_berangkat = $fetchInfo['start'];
+         $tgl_kembali = $fetchInfo['end'];
+     
+         // Fetch booking data using Eloquent ORM
+         try {
+             $bookings = Booking::select('id_booking', 'pilihan_bus', 'tgl_berangkat', 'tgl_kembali', 'nama_pemesan')
+                 ->where('tgl_berangkat', '>=', $tgl_berangkat)
+                 ->where('tgl_kembali', '<=', $tgl_kembali)
+                 ->get();
+     
+             // Log the retrieved bookings
+             Log::info('Bookings fetched:', $bookings->toArray());
+         } catch (\Exception $e) {
+             Log::error('Error fetching bookings: ' . $e->getMessage());
+             return [];
+         }
      
          // Format the booking data as events for FullCalendar
-         $events = $bookings->map(function ($booking) {
-             // Assuming 'pilihan_bus' is a comma-separated string like "1,2,3"
-             $busNumbers = explode(',', trim($booking->pilihan_bus, '[]'));
+         try {
+             $events = $bookings->map(function (Booking $booking) {
+                 // Ensure 'pilihan_bus' is a comma-separated string
+                 $busNumbers = explode(',', trim($booking->pilihan_bus, '[]'));
      
-             return array_map(function ($busNumber) use ($booking) {
-                 return [
-                     'id' => $booking->id_booking, // Use 'id_booking' instead of 'id'
-                     'title' => trim($busNumber) . ' - ' . $booking->nama_pemesan,
-                     'start' => $booking->tgl_berangkat,
-                     'end' => $booking->tgl_kembali,
-                     'extendedProps' => [ // Attach additional booking details if needed
-                         'pilihan_bus' => trim($busNumber),
-                         'nama_pemesan' => $booking->nama_pemesan,
-                     ],
-                 ];
-             }, $busNumbers);
-         })->flatten(1)->toArray();
+                 return array_map(function ($busNumber) use ($booking) {
+                     return [
+                         'id' => $booking->id_booking, 
+                         'title' => trim($busNumber) . ' - ' . $booking->nama_pemesan,
+                         'start' => $booking->tgl_berangkat,
+                         'end' => $booking->tgl_kembali,
+                         'url' => BookingResource::getUrl('view', ['record' => $booking]),
+                         'extendedProps' => [
+                             'pilihan_bus' => trim($busNumber),
+                             'nama_pemesan' => $booking->nama_pemesan,
+                         ],
+                     ];
+                 }, $busNumbers);
+             })->flatten(1)->toArray();
      
-         return $events;
+             // Log the formatted events
+             Log::info('Formatted events:', $events);
+     
+             return $events;
+         } catch (\Exception $e) {
+             Log::error('Error formatting events: ' . $e->getMessage());
+             return [];
+         }
      }
-        /**
-     * Provide data to the Blade view.
-     *
-     * @return array
-     */
 
     protected function getViewData(): array
     {
@@ -72,12 +105,6 @@ class CalendarWidget extends FullCalendarWidget
             'events' => $this->fetchEvents([]),
         ];
     }
-
-        /**
-     * Define the Blade view path.
-     *
-     * @return string
-     */
 
     protected static function getView(): string
     {

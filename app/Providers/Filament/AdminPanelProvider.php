@@ -39,6 +39,7 @@ class AdminPanelProvider extends PanelProvider
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->pages([
                 Pages\Dashboard::class,
+                
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
@@ -62,10 +63,15 @@ class AdminPanelProvider extends PanelProvider
                 Authenticate::class,
             ])
             ->plugins([
-                FilamentFullCalendarPlugin::make(),
-            ])
-            ->widgets([
-                CalendarWidget::class,
+                FilamentFullCalendarPlugin::make()
+                ->schedulerLicenseKey('')
+                ->selectable(true)
+                ->editable(false)
+                ->timezone(config('app.timezone'))
+                ->locale(config('app.locale'))
+                ->plugins(['dayGrid', 'timeGrid', 'list'])
+                ->config([])
             ]);
+
     }
 }
