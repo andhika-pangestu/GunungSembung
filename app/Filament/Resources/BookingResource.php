@@ -108,13 +108,13 @@ class BookingResource extends Resource
                 TextColumn::make('tujuan')
                     ->searchable()
                     ->label('Tujuan')
-                    ->limit(25)
+                    ->limit(100)
                     ->wrap(),
 
                TextColumn::make('pilihan_bus')
                     ->searchable()
                     ->label('Pilihan Bus')
-                    ->limit(25)
+                    ->limit(100)
                     ->wrap(),
                 
                 TextColumn::make('tgl_berangkat')
@@ -144,7 +144,7 @@ class BookingResource extends Resource
 
                TextColumn::make('keterangan')
                     ->label('Keterangan')
-                    ->limit(25)
+                    ->limit(100)
                     ->wrap(),
                     // ->toggleable(isToggledHiddenByDefault: true),                  
                
