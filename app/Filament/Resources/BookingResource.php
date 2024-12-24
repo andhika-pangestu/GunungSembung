@@ -59,7 +59,7 @@ class BookingResource extends Resource
 
                  MultiSelect::make('pilihan_bus')
                     ->required()
-                    ->options(function ($get) {
+                    ->options(function ($get, $record) {
                         $tgl_berangkat = $get('tgl_berangkat');
                         $tgl_kembali = $get('tgl_kembali');
 
@@ -67,7 +67,7 @@ class BookingResource extends Resource
                             return [];
                         }
 
-                        return \App\Models\Bus::whereDoesntHave('jadwal', function ($query) use ($tgl_berangkat, $tgl_kembali) {
+                        $query = \App\Models\Bus::whereDoesntHave('jadwal', function ($query) use ($tgl_berangkat, $tgl_kembali, $record) {
                             $query->where(function ($query) use ($tgl_berangkat, $tgl_kembali) {
                                 $query->whereBetween('tgl_berangkat', [$tgl_berangkat, $tgl_kembali])
                                       ->orWhereBetween('tgl_kembali', [$tgl_berangkat, $tgl_kembali])
@@ -76,7 +76,17 @@ class BookingResource extends Resource
                                                 ->where('tgl_kembali', '>=', $tgl_kembali);
                                       });
                             });
-                        })->get()->mapWithKeys(function ($bus) {
+
+                            if ($record) {
+                                $query->where('id_booking', '!=', $record->id_booking);
+                            }
+                        });
+
+                        if ($record && is_array($record->pilihan_bus)) {
+                            $query->orWhereIn('no_polisi', $record->pilihan_bus);
+                        }
+
+                        return $query->get()->mapWithKeys(function ($bus) {
                             return [$bus->no_polisi => "{$bus->jenis} - {$bus->no_polisi}"];
                         });
                     }),
