@@ -4,24 +4,26 @@ namespace App\Filament\Resources;
 
 use Filament\Forms;
 use Filament\Tables;
-use App\Models\SuratTugasSupir;
+use App\Models\Booking;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
+use App\Models\SuratTugasSupir;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Filament\Resources\Resource;
+use Filament\Tables\Actions\Action;
+use Filament\Tables\Filters\Filter;
 use Filament\Forms\Components\Select;
+use Illuminate\Support\Facades\Blade;
 use Filament\Forms\Components\Textarea;
+use Filament\Tables\Columns\Summarizers\Sum;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\TimePicker;
-use Filament\Tables\Actions\Action;
-use Barryvdh\DomPDF\Facade\Pdf;
-use Illuminate\Support\Facades\Blade;
-use App\Filament\Resources\SuratTugasSupirResource\Pages;
-use Filament\Tables\Filters\Filter;
 use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
-
+use App\Filament\Resources\SuratTugasSupirResource\Pages;
+use Illuminate\Support\Str;
 class SuratTugasSupirResource extends Resource
 {
     protected static ?string $model = SuratTugasSupir::class;
@@ -32,13 +34,21 @@ class SuratTugasSupirResource extends Resource
     {
         return $form->schema([
             Select::make('id_booking')
-               ->label('Booking')
-               ->relationship('booking', 'id_booking', function ($query) {
-                   return $query->select('id_booking', 'nama_pemesan')
-                                ->orderBy('id_booking', 'asc') // Specify 'asc' or 'desc'
-                                ->orderBy('nama_pemesan', 'asc'); // Specify 'asc' or 'desc'
-               })
+                ->label('Booking')
+                ->relationship('booking', 'id_booking', function ($query) {
+                    return $query->select('id_booking', 'nama_pemesan')
+                        ->orderBy('id_booking');
+                })
                 ->searchable()
+                ->getSearchResultsUsing(function (string $search) {
+                    return Booking::where('id_booking', 'like', "%{$search}%")
+                        ->orWhere('nama_pemesan', 'like', "%{$search}%")
+                        ->get()
+                        ->mapWithKeys(function ($booking) {
+                            $displayName = "{$booking->id_booking} - {$booking->nama_pemesan}";
+                            return [$booking->id_booking => $displayName];
+                        });
+                })
                 ->required()
                 ->reactive()
                 ->afterStateUpdated(function (callable $set, $state) {
@@ -64,6 +74,7 @@ class SuratTugasSupirResource extends Resource
                         $set('nama_supir', $bus->nama_supir);
                     }
                 })
+                ->reactive()
                 ->required(),
     
             TextInput::make('nama_supir')->required(),
@@ -73,7 +84,7 @@ class SuratTugasSupirResource extends Resource
             TextInput::make('nama_pemesan')->required(),
             TextInput::make('alamat_penjemputan')->required(),
             TextInput::make('tujuan')->required(),
-            Forms\Components\TextInput::make('kas_komisi')
+            TextInput::make('kas_komisi')
                 ->label('Kas Komisi')
                 ->required()
                 ->numeric()
@@ -86,25 +97,37 @@ class SuratTugasSupirResource extends Resource
 
     public static function table(Table $table): Table
     {
-        return $table->columns([
+        return $table
+        ->defaultSort('id_booking', 'desc')
+        ->columns([
             TextColumn::make('id_booking')->label('Booking ID')->sortable(),
             TextColumn::make('nama_supir')->sortable()->searchable(),
             TextColumn::make('no_polisi')->sortable()->searchable(),
             TextColumn::make('tgl_berangkat')
+            ->label('Tanggal Berangkat')
                 ->sortable()
-                ->dateTime('d m y'),
+                ->dateTime('d F Y'),
+                TextColumn::make('tgl_kembali')
+                ->label('Tanggal Kembali')
+                ->sortable()
+                ->dateTime('d F Y'),
             TextColumn::make('jam_berangkat')->sortable(),
             TextColumn::make('nama_pemesan')->sortable()->searchable(),
-            TextColumn::make('alamat_penjemputan')->sortable()->searchable(),
-            TextColumn::make('tujuan')->sortable()->searchable(),
-            TextColumn::make('kas_komisi')
-                ->label('Kas Komisi')
-                ->sortable()
-                ->currency('IDR'),
+            TextColumn::make('alamat_penjemputan')->sortable()->searchable()
+,
+            TextColumn::make('tujuan')->sortable()->searchable()
+            ->formatStateUsing(fn (string $state) => Str::limit($state, 50)),
             TextColumn::make('nama_admin')->sortable()->searchable(),
             TextColumn::make('tgl_st')
                 ->sortable()
-                ->dateTime('d m y'),
+                ->label('Tanggal Surat')
+                ->dateTime('d F Y'),
+            TextColumn::make('kas_komisi')
+                ->sortable()
+                ->label('Kas Komisi')
+                ->currency('IDR')
+                ->summarize(Sum::make()->currency('IDR')),
+
         ])
         ->filters([
             SelectFilter::make('no_polisi')
@@ -142,7 +165,7 @@ class SuratTugasSupirResource extends Resource
                         echo Pdf::loadHtml(
                             Blade::render('pdf.surat_tugas_supir', ['record' => $record])
                         )->stream();
-                    }, $record->id_kuitansi . ' - ' . $record->nama_supir  . ' - ' . $record->tgl_st . '.pdf');
+                    }, $record->booking->id_booking . ' - ' . $record->nama_supir  . ' - ' . $record->tgl_st .' - '.$record->no_polisi . '.pdf');
                 }),
         ]);
     }

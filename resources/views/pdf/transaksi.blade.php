@@ -232,6 +232,7 @@
             </table>
         </section>
 
+
         <table class="booking-table">
             <thead>
                 <tr>
