@@ -53,30 +53,50 @@ class PerbaikanResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
-            ->defaultSort('bus.no_polisi', 'desc')
-            ->columns([
-                TextColumn::make('bus.no_polisi')
-                    ->label('Nomor Polisi')
-                    ->sortable()
-                    ->searchable(),
-                TextColumn::make('tipe_perbaikan')
-                    ->label('Tipe Perbaikan')
-                    ->sortable()
-                    ->searchable(),
-                TextColumn::make('nama_suku_cadang')
-                    ->label('Nama Suku Cadang')
-                    ->sortable()
-                    ->searchable(),
-                TextColumn::make('tgl_perbaikan')
-                    ->label('Tanggal Perbaikan')
-                    ->sortable('desc')
-                    ->searchable()
-                    ->dateTime('d F Y'),
-                
-                \Filament\Tables\Columns\TextColumn::make('harga_perbaikan')
-                    ->label('harga_perbaikan')
-                    ->currency('IDR')
-                    ->summarize(Sum::make() ->currency('IDR')),
+
+        ->columns([
+            TextColumn::make('bus.no_polisi')
+                ->label('Nomor Polisi')
+                ->sortable()
+                ->searchable(),
+            TextColumn::make('tipe_perbaikan')
+                ->label('Tipe Perbaikan')
+                ->sortable()
+                ->searchable(),
+            TextColumn::make('nama_suku_cadang')
+                ->label('Nama Suku Cadang')
+                ->sortable()
+                ->searchable(),
+            TextColumn::make('tgl_perbaikan')
+                ->label('Tanggal Perbaikan')
+                ->sortable()
+                ->searchable(),
+            MoneyColumn::make('harga_perbaikan')
+                ->label('Harga Perbaikan')
+                ->currency('IDR') // Set your currency here
+                ->locale('id_ID') // Set your locale here
+                ->sortable()
+                ->searchable(),
+        ])
+        ->filters([
+            Filter::make('tgl_perbaikan')
+                ->form([
+                    DatePicker::make('start_date')
+                        ->label('Start Date')
+                        ->placeholder('Select start date'),
+                    DatePicker::make('end_date')
+                        ->label('End Date')
+                        ->placeholder('Select end date'),
+                ])
+                ->query(function (Builder $query, array $data): Builder {
+                    return $query
+                        ->when($data['start_date'], fn ($query, $date) => $query->whereDate('tgl_perbaikan', '>=', $date))
+                        ->when($data['end_date'], fn ($query, $date) => $query->whereDate('tgl_perbaikan', '<=', $date));
+                }),
+        ])
+        ->actions([
+            Tables\Actions\EditAction::make(),
+        ])
 
             ])
             ->filters([

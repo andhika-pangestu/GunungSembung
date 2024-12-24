@@ -6,13 +6,14 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
     <link href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css" rel="stylesheet">
-    <title>@yield('title', 'Gunung Sembung')</title>
+    <title>@yield('title', 'PT Gunung Sembung Putra')</title>
+    <link rel="icon" href="{{ asset('images/gsp.png') }}" type="image/x-icon">
     @vite('resources/css/app.css')
 </head>
 <body class="font-helvetica">
     <header>
         <div class="fi-logo flex text-xl font-bold leading-5 tracking-tight text-gray-950 dark:text-white">
-            Laravel
+            PT Gunung Sembung Putra
         </div>
         @include('partials.header') <!-- Menyertakan header dari partials -->
     </header>

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Index')
+@section('title', 'PT Gunung Sembung Putra')
 
 @section('content')
     <!-- Bagian lainnya di halaman -->

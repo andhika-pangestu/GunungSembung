@@ -31,8 +31,11 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login()
-            ->brandName('Filament Demo')
-                    ->favicon(asset('images\gsp.jpg'))
+
+            
+            ->brandName('PT Gunung Sembung Putra')
+            ->favicon(asset('images\gsp.png'))
+
             ->colors([
                 'primary' => Color::Amber,
             ])
