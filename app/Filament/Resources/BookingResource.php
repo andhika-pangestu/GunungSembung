@@ -5,8 +5,8 @@ namespace App\Filament\Resources;
 use Filament\Forms;
 use Filament\Tables;
 use App\Models\Booking;
-use Filament\Forms\Form;
-use Filament\Tables\Table;
+use Filament\Resources\Form;
+use Filament\Resources\Table;
 use Filament\Resources\Resource;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
@@ -25,10 +25,11 @@ use Filament\Tables\Actions\Action;
 use Illuminate\Support\Facades\Blade;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Malzariey\FilamentDaterangepickerFilter\Filters\DateRangeFilter;
- 
 use App\Models\Transaksi;
-
-
+use Filament\Tables\Columns\IconColumn;
+use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Actions\DeleteAction;
+use Filament\Tables\Actions\DeleteBulkAction;
 
 class BookingResource extends Resource
 {
@@ -36,23 +37,49 @@ class BookingResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-clipboard-document-check';
     protected static ?string $navigationGroup = 'Pemesanan';
 
-    public static function form(Form $form): Form
+    public static function form(Forms\Form $form): Forms\Form
     {
         return $form
             ->schema([
+
                 DatePicker::make('tgl_pemesanan')
                     ->required(),
                     
                 TextInput::make('nama_pemesan')
                     ->required(),
-
-                MultiSelect::make('pilihan_bus')
+                DatePicker::make('tgl_berangkat')
+                    ->required(),
+              DatePicker::make('tgl_kembali')
                     ->required()
-                    ->options(function () {
-                        return \App\Models\Bus::pluck('jenis', 'no_polisi')->toArray();
-                    })
-                    ->label('Pilih Bus')
-                    ->reactive(),
+                    ->afterOrEqual('tgl_berangkat')
+                    ->helperText('Tanggal kembali harus lebih dari tanggal keberangkatan.'),
+              
+                TimePicker::make('jam_berangkat')
+                    ->required(),
+
+                 MultiSelect::make('pilihan_bus')
+                    ->required()
+                    ->options(function ($get) {
+                        $tgl_berangkat = $get('tgl_berangkat');
+                        $tgl_kembali = $get('tgl_kembali');
+
+                        if (!$tgl_berangkat || !$tgl_kembali) {
+                            return [];
+                        }
+
+                        return \App\Models\Bus::whereDoesntHave('jadwal', function ($query) use ($tgl_berangkat, $tgl_kembali) {
+                            $query->where(function ($query) use ($tgl_berangkat, $tgl_kembali) {
+                                $query->whereBetween('tgl_berangkat', [$tgl_berangkat, $tgl_kembali])
+                                      ->orWhereBetween('tgl_kembali', [$tgl_berangkat, $tgl_kembali])
+                                      ->orWhere(function ($query) use ($tgl_berangkat, $tgl_kembali) {
+                                          $query->where('tgl_berangkat', '<=', $tgl_berangkat)
+                                                ->where('tgl_kembali', '>=', $tgl_kembali);
+                                      });
+                            });
+                        })->get()->mapWithKeys(function ($bus) {
+                            return [$bus->no_polisi => "{$bus->jenis} - {$bus->no_polisi}"];
+                        });
+                    }),
 
                 TextInput::make('alamat_penjemputan')
                     ->required(),
@@ -66,19 +93,7 @@ class BookingResource extends Resource
                     ->numeric()
                     ->prefix('Rp')
                     ->currencyMask(thousandSeparator: '.', decimalSeparator: ',', precision: 0),
-
-                DatePicker::make('tgl_berangkat')
-                    ->required(),
-
-                TimePicker::make('jam_berangkat')
-                    ->required(),
-                    
-                DatePicker::make('tgl_kembali')
-                    ->required()
-                    ->afterOrEqual('tgl_berangkat')
-                    ->helperText('Tanggal kembali harus lebih dari tanggal keberangkatan.'),
-
-                Textarea::make('keterangan')
+                  Textarea::make('keterangan')
                     ->nullable()
                     ->maxLength(255),
 
@@ -90,10 +105,14 @@ class BookingResource extends Resource
     {      return $table
            ->defaultSort('id_booking', 'desc')
            ->columns([
+            ]);
+    }
+
                 TextColumn::make('id_booking')
                     ->searchable()
                     ->label('Id Booking')
                     ->sortable(),
+
                     // ->toggleable(isToggledHiddenByDefault: true),
                 
                TextColumn::make('nama_pemesan')
@@ -201,14 +220,6 @@ class BookingResource extends Resource
                ExportBulkAction::make()->label('Export to Excel'),
            ]);
 
-    }
-
-    public static function infolists(Infolists $infolist): Infolists
-    {
-        return $infolist
-            ->schema([
-                TextEntry::make('nama_pemesan')
-            ]);
     }
 
     public static function getRelations(): array
