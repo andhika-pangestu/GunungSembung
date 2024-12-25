@@ -71,7 +71,7 @@ class PerbaikanResource extends Resource
                 ->label('Tanggal Perbaikan')
                 ->sortable()
                 ->searchable(),
-            MoneyColumn::make('harga_perbaikan')
+                TextColumn::make('harga_perbaikan')
                 ->label('Harga Perbaikan')
                 ->currency('IDR') // Set your currency here
                 ->locale('id_ID') // Set your locale here
@@ -98,7 +98,6 @@ class PerbaikanResource extends Resource
             Tables\Actions\EditAction::make(),
         ])
 
-            ])
             ->filters([
                 Filter::make('tgl_perbaikan')
                     ->form([
