@@ -19,7 +19,7 @@ class Booking extends Model
     protected $primaryKey = 'id_booking';
 
     protected $casts = [
-        'pilihan_bus' => 'array', // Tambahkan ini untuk meng-cast pilihan_bus sebagai array
+        'pilihan_bus' => 'array', // Automatically cast pilihan_bus to array
     ];
 
     public function bus()
@@ -53,20 +53,26 @@ class Booking extends Model
     protected static function booted()
     {
         static::updated(function ($booking) {
-            // Update jadwal terkait
-            $booking->jadwals()->delete(); // Hapus jadwal lama
+            // Check if pilihan_bus is an array
+            if (is_array($booking->pilihan_bus)) {
+                // Delete old jadwal records
+                $booking->jadwals()->delete();
 
-            // Simpan jadwal baru
-            foreach ($booking->pilihan_bus as $no_polisi) {
-                Jadwal::create([
-                    'no_polisi' => $no_polisi,
-                    'tgl_berangkat' => $booking->tgl_berangkat,
-                    'tgl_kembali' => $booking->tgl_kembali,
-                    'id_booking' => $booking->id_booking,
-                ]);
+                // Save new jadwal records
+                foreach ($booking->pilihan_bus as $no_polisi) {
+                    Jadwal::create([
+                        'no_polisi' => $no_polisi,
+                        'tgl_berangkat' => $booking->tgl_berangkat,
+                        'tgl_kembali' => $booking->tgl_kembali,
+                        'id_booking' => $booking->id_booking,
+                    ]);
+                }
+            } else {
+                // Handle the case where pilihan_bus is not an array (optional logging or error handling)
+                // Optionally log or throw an exception
             }
 
-            // Update transaksi terkait
+            // Update transaksi records
             foreach ($booking->transaksi as $transaksi) {
                 $transaksi->update([
                     'tgl_berangkat' => $booking->tgl_berangkat,
