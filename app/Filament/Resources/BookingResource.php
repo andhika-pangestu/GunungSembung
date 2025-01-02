@@ -119,8 +119,7 @@ class BookingResource extends Resource
                 TextColumn::make('id_booking')
                     ->searchable()
                     ->label('Id Booking')
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->sortable(),
                 
                TextColumn::make('nama_pemesan')
                     ->searchable()
