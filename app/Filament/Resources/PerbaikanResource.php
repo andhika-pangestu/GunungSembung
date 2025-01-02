@@ -71,12 +71,11 @@ class PerbaikanResource extends Resource
                 ->label('Tanggal Perbaikan')
                 ->sortable()
                 ->searchable(),
-                TextColumn::make('harga_perbaikan')
+            TextColumn::make('harga_perbaikan')
                 ->label('Harga Perbaikan')
-                ->currency('IDR') // Set your currency here
-                ->locale('id_ID') // Set your locale here
-                ->sortable()
-                ->searchable(),
+                ->searchable()
+                ->currency('IDR'),
+                
         ])
         ->filters([
             Filter::make('tgl_perbaikan')

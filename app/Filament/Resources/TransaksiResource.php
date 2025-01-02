@@ -95,91 +95,90 @@ class TransaksiResource extends Resource
 
     public static function table(Table $table): Table
     {
-        return 
-        $table
-        ->defaultSort('id_booking', 'desc')
-        ->columns([
-            TextColumn::make('id_booking')
-                ->label('Booking ID')
-                ->sortable(),
+        return
+            $table
+            ->defaultSort('id_booking', 'desc')
+            ->columns([
+                TextColumn::make('id_booking')
+                    ->label('Booking ID')
+                    ->sortable(),
 
-            TextColumn::make('booking.nama_pemesan')
-                ->label('Nama Pemesan')
-                ->sortable()
-                ->searchable(),
+                TextColumn::make('booking.nama_pemesan')
+                    ->label('Nama Pemesan')
+                    ->sortable()
+                    ->searchable(),
 
-            TextColumn::make('booking.alamat_penjemputan')
-                ->label('Alamat Penjemputan')
-                ->sortable()
-                ->searchable(),
+                TextColumn::make('booking.alamat_penjemputan')
+                    ->label('Alamat Penjemputan')
+                    ->sortable()
+                    ->searchable(),
 
-            TextColumn::make('booking.tujuan')
-                ->label('Tujuan')
-                ->sortable()
-                ->searchable(),
+                TextColumn::make('booking.tujuan')
+                    ->label('Tujuan')
+                    ->sortable()
+                    ->searchable(),
 
-            TextColumn::make('booking.tgl_pemesanan')
-                ->label('Tanggal Pemesanan')
-                ->sortable()
-                ->searchable()
-                ->dateTime('d F Y'),
-
-               
-            TextColumn::make('jml_bayar')
-            ->label('Jumlah Bayar')
-            ->sortable()
-            ->currency('IDR')
-            ->summarize(Sum::make() ->currency('IDR')),
+                TextColumn::make('booking.tgl_pemesanan')
+                    ->label('Tanggal Pemesanan')
+                    ->sortable()
+                    ->searchable()
+                    ->dateTime('d F Y'),
 
 
-            TextColumn::make('sisa')
-                ->label('Sisa')
-                ->sortable()
-                ->searchable()
-                ->currency('IDR'),
+                TextColumn::make('jml_bayar')
+                    ->label('Jumlah Bayar')
+                    ->sortable()
+                    ->currency('IDR')
+                    ->summarize(Sum::make()->currency('IDR')),
 
-            BadgeColumn::make('status')
-                ->label('Status')
-                ->sortable()
-                ->colors([
-                    'danger' => 'pending',
-                    'warning' => 'dp',
-                    'success' => 'lunas',
-                ])
-                ->searchable(),
-        ])
-        ->filters([
-            DateRangeFilter::make('booking.tgl_pemesanan')
-                ->label('Tanggal Pemesanan')
-                ->useRangeLabels()
-                ->modifyQueryUsing(function (Builder $query, $startDate, $endDate) {
-                    if ($startDate && $endDate) {
-                        $query->whereHas('booking', function (Builder $query) use ($startDate, $endDate) {
-                            $query->whereBetween('tgl_pemesanan', [$startDate, $endDate]);
-                        });
-                    }
-                })
-        ])
-        ->actions([
-            Tables\Actions\EditAction::make(),
-            Action::make('pdf')
-                ->label('Export to PDF')
-                ->color('success')
-                ->icon('heroicon-s-arrow-down-tray')
-                ->action(function (Transaksi $record) {
-                    return response()->streamDownload(function () use ($record) {
-                        echo Pdf::loadHtml(
-                            Blade::render('pdf.transaksi', ['record' => $record])
-                        )->stream();
-                    }, $record->id_kuitansi.'-'. $record->booking->nama_pemesan .'-'. $record->booking->tgl_pemesanan . '.pdf');
-                }),
-        ])
-        
-        ->bulkActions([
-            Tables\Actions\DeleteBulkAction::make(),
-            ExportBulkAction::make()->label('Export to Excel'),
-            
-        ]);
+                TextColumn::make('sisa')
+                    ->label('Sisa')
+                    ->sortable()
+                    ->searchable()
+                    ->currency('IDR'),
+
+                BadgeColumn::make('status')
+                    ->label('Status')
+                    ->sortable()
+                    ->colors([
+                        'danger' => 'pending',
+                        'warning' => 'dp',
+                        'success' => 'lunas',
+                    ])
+                    ->searchable(),
+            ])
+            ->filters([
+                DateRangeFilter::make('booking.tgl_pemesanan')
+                    ->label('Tanggal Pemesanan')
+                    ->useRangeLabels()
+                    ->modifyQueryUsing(function (Builder $query, $startDate, $endDate) {
+                        if ($startDate && $endDate) {
+                            $query->whereHas('booking', function (Builder $query) use ($startDate, $endDate) {
+                                $query->whereBetween('tgl_pemesanan', [$startDate, $endDate]);
+                            });
+                        }
+                    })
+            ])
+            ->actions([
+                Tables\Actions\EditAction::make(),
+                Action::make('pdf')
+                    ->label('Export to PDF')
+                    ->color('success')
+                    ->icon('heroicon-s-arrow-down-tray')
+                    ->action(function (Transaksi $record) {
+                        return response()->streamDownload(function () use ($record) {
+                            echo Pdf::loadHtml(
+                                Blade::render('pdf.transaksi', ['record' => $record])
+                            )->stream();
+                        }, $record->id_kuitansi . '-' . $record->booking->nama_pemesan . '-' . $record->booking->tgl_pemesanan . '.pdf');
+                    }),
+            ])
+
+            ->bulkActions([
+                Tables\Actions\DeleteBulkAction::make(),
+                ExportBulkAction::make()->label('Export to Excel'),
+
+            ]);
     }
 
     public static function getRelations(): array
