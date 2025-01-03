@@ -1,10 +1,17 @@
 <section class="w-full px-8 text-gray-700 bg-white fixed z-50 top-0 left-0">
     <div class="container flex items-center justify-between py-5 mx-auto md:flex-row max-w-7xl">
-        <!-- Logo -->
-        <a href="#_" class="text-xl font-black leading-none text-red-600">GUNUNG SEMBUNG PUTRA</a>
+        <!-- Logo and Title Container -->
+        <div class="flex items-center space-x-4">
+            <!-- Logo -->
+            <a href="{{ url('/') }}">
+                <img src="{{ asset('images/gsp.jpg') }}" alt="GSP Logo" class="h-12 w-auto">
+            </a>
+            <!-- Title -->
+            <a href="#_" class="text-xl font-black leading-none text-red-600">GUNUNG SEMBUNG PUTRA</a>
+        </div>
 
         <!-- Hamburger Button (Mobile) -->
-        <button id="menu-toggle" class="block md:hidden ml-auto focus:outline-none">
+        <button id="menu-toggle" class="block md:hidden focus:outline-none">
             <svg class="w-6 h-6 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>

@@ -109,10 +109,6 @@
                                     class="w-full h-full object-fill">
                             </div>
                             <div class="swiper-slide">
-                                <img src="{{ asset('hero-img/Bis3.jpg') }}" alt="Image 3"
-                                    class="w-full h-full object-fill">
-                            </div>
-                            <div class="swiper-slide">
                                 <img src="{{ asset('hero-img/Sign1.jpg') }}" alt="Image 4"
                                     class="w-full h-full object-fill">
                             </div>
@@ -148,17 +144,21 @@
 
 <!-- Initialize Swiper -->
 <script>
-  document.addEventListener('DOMContentLoaded', function () {
-    var swiper = new Swiper('.swiper-container', {
-      loop: true,
-      autoplay: {
-        delay: 5000, // 1 second delay
-        disableOnInteraction: false,
-      },
-      pagination: {
-        el: '.swiper-pagination',
-        clickable: true,
-      },
+    document.addEventListener('DOMContentLoaded', function () {
+      var swiper = new Swiper('.swiper-container', {
+        loop: true,
+        autoplay: {
+          delay: 5000, // 5 second delay
+          disableOnInteraction: false,
+        },
+        navigation: {
+          nextEl: '.custom-next',
+          prevEl: '.custom-prev',
+        },
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true,
+        },
+      });
     });
-  });
-</script>
+  </script>
