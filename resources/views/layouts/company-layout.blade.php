@@ -6,6 +6,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css" rel="stylesheet">
     <title>@yield('title', 'Gunung Sembung')</title>
+    <link rel="icon" href="{{ asset('images/gsp.png') }}" type="image/x-icon">
     @vite('resources/css/app.css')</head>
 <body class="font-helvetica">
     <header>
