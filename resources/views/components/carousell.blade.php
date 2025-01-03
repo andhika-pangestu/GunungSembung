@@ -1,5 +1,4 @@
 <div class="relative max-w-2xl mx-auto">
-    <!-- Left Arrow Button -->
     <button type="button"
         class="absolute top-1/2 -left-8 transform -translate-y-1/2 z-40 w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center hover:bg-gray-300 transition"
         id="prev-slide">
